@@ -1,1 +1,2 @@
 ✅	R	07/07	Ajouter libft la plus à jour
+	R	08/07	Tester le parsing avec des maps valides & invalides
