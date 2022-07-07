@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 00:54:45 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/07 00:54:45 by requinch         ###   ########.fr       */
+/*   Updated: 2022/07/07 17:14:21 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,20 @@
 /*			Simple typedefs													  */
 /******************************************************************************/
 
-typedef unsigned short t_counter;
-typedef unsigned int t_size;
+typedef unsigned short	t_counter;
+typedef unsigned int	t_size;
 
 /******************************************************************************/
 /*			Enums															  */
 /******************************************************************************/
 
-typedef enum boolean
+typedef enum	boolean
 {
 	TRUE = 1,
 	FALSE = 0,
-} t_boolean;
+}				t_boolean;
 
-typedef enum errcode
+typedef enum	errcode
 {
 	ERR_UNDEFINED = 0,
 	ERR_MALLOC = 1,
@@ -44,23 +44,23 @@ typedef enum errcode
 	ERR_FILEPATH = 21,
 	ERR_OPEN = 30,
 	ERR_READ = 31,
-} t_errorcode;
+}				t_errorcode;
 
 /******************************************************************************/
 /*			Structures														  */
 /******************************************************************************/
 
-typedef struct s_coordinates
+typedef struct	s_vector
 {
 	unsigned int	x;
 	unsigned int	y;
-} t_coordinates;
+} 				t_vector;
 
-typedef struct s_resolution
+typedef struct	s_resolution
 {
 	unsigned int	width;
 	unsigned int	height;
-} t_resolution;
+}				t_resolution;
 
 /***
 ****	fov :			0 - 360
@@ -68,12 +68,17 @@ typedef struct s_resolution
 ****	Maybe add other properties
 ***/
 
-typedef struct s_player_info
+typedef struct s_camera
 {
-	t_coordinates	pos;
-	unsigned short	fov;
-	unsigned short	direction;
-} t_player_info;
+	t_vector	r_fov;
+	t_vector	l_fov;
+}				t_camera;
+
+typedef struct	s_player_info
+{
+	t_vector	pos;
+	t_camera	camera;
+}				t_player_info;
 
 /***
 ****	resolution :	[0] : width
@@ -84,7 +89,7 @@ typedef struct s_player_info
 ****					[3] : W
 ***/
 
-typedef struct s_map_info
+typedef struct	s_map_info
 {
 	char			*raw;
 	t_resolution	map_resolution;
@@ -93,14 +98,14 @@ typedef struct s_map_info
 	char			*tex_path[4];
 	unsigned int	ground_clr;
 	unsigned int	ceiling_clr;
-} t_map_info;
+}				t_map_info;
 
-typedef struct s_world
+typedef struct	s_world
 {
 	t_map_info		map;
 	t_player_info	player;
 	
-} t_world;
+}				t_world;
 
 /******************************************************************************/
 /*			Function declarations											  */
@@ -108,12 +113,12 @@ typedef struct s_world
 
 /*	errors.c	*/
 
-void	*err_fr(t_errorcode code, void *ptr);
-void	*throw_error(t_errorcode code);
+void		*err_fr(t_errorcode code, void *ptr);
+void		*throw_error(t_errorcode code);
 
 /*	reader.c	*/
 
-char	*read_file(char *filepath);
+char		*read_file(char *filepath);
 
 /*	parser.c	*/
 
