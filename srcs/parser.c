@@ -12,16 +12,42 @@
 
 #include "../includes/cub3d.h"
 
-t_boolean	parsing(char *cub_raw)
-{
-	t_boolean	checklist[9];
-	t_counter	index;
+/*
+**	Return	:	-1 when invalid
+**				0 when skip line
+**				1 when proper line parsed
+*/
 
-	index = 0;
-	while (index < 9)
+short	parse_next_line(char *cub_raw, t_counter step)
+{
+
+}
+
+/*
+**	Step	:		0 - 3	:	paths to NSEW textures
+**					4 - 5	:	RGB colors of floor and ceiling
+**					6		:	map
+**					7		:	check no bullshit after map
+*/
+
+t_boolean	parsing(char *filepath)
+{
+	t_boolean	checklist[7];
+	t_counter	step;
+	int	fd;
+	short	last;
+
+	step = 0;
+	while (step < 8)
 	{
-		checklist[index] = FALSE;
-		index += 1;
+		last = parse_next_line(fd, step);
+		if (last < 0)
+		{
+			throw_error(ERR_FILECONTENT);
+			return (FALSE);
+		}
+		else
+		step += last;
 	}
-	return (FALSE);
+	return (TRUE);
 }

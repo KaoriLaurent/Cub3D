@@ -14,6 +14,12 @@
 # define CUB3D_H
 
 /******************************************************************************/
+/*			Includes														  */
+/******************************************************************************/
+
+# include "../libft/includes/libft.h"
+
+/******************************************************************************/
 /*			Defines															  */
 /******************************************************************************/
 
@@ -39,9 +45,11 @@ typedef enum boolean
 typedef enum errcode
 {
 	ERR_UNDEFINED = 0,
-	ERR_MALLOC = 1,
+	ERR_MALLOC = 10,
+	ERR_MANY_ARG = 11,
 	ERR_FILEFORMAT = 20,
 	ERR_FILEPATH = 21,
+	ERR_FILECONTENT = 22,
 	ERR_OPEN = 30,
 	ERR_READ = 31,
 } t_errorcode;
@@ -87,9 +95,8 @@ typedef struct s_player_info
 typedef struct s_map_info
 {
 	char			*raw;
-	t_resolution	map_resolution;
+	t_resolution	map_res;
 	unsigned int	**map;
-	t_resolution	win_resolution;
 	char			*tex_path[4];
 	unsigned int	ground_clr;
 	unsigned int	ceiling_clr;
