@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   angles_basic.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/07 00:54:00 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/07 00:54:00 by requinch         ###   ########.fr       */
+/*   Created: 2022/07/07 18:08:06 by requinch          #+#    #+#             */
+/*   Updated: 2022/07/07 18:08:06 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-t_boolean	parsing(char *cub_raw)
+short	angle_add(short one, short two)
 {
-	t_boolean	checklist[9];
-	t_counter	index;
+	return ((one + two) % 360);
+}
 
-	index = 0;
-	while (index < 9)
-	{
-		checklist[index] = FALSE;
-		index += 1;
-	}
-	return (FALSE);
+short	angle_sub(short one, short two)
+{
+	return ((one - two) % 360);
+}
+
+short	angle_mul(short one, short two)
+{
+	return ((one * two) % 360);
+}
+
+short	angle_div(short one, short two)
+{
+	return ((one / two) % 360);
 }
