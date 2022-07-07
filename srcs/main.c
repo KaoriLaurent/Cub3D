@@ -21,6 +21,7 @@ int	main(int ac, char **av)
 	map.raw = read_file(av[1]);
 	if (!map.raw || !parsing(map.raw))
 		return (0);
+	//fill in &map
 	//do stuff
 	return (1);
 }

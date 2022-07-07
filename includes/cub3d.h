@@ -50,6 +50,31 @@ typedef enum errcode
 /*			Structures														  */
 /******************************************************************************/
 
+typedef struct s_coordinates
+{
+	unsigned int	x;
+	unsigned int	y;
+} t_coordinates;
+
+typedef struct s_resolution
+{
+	unsigned int	width;
+	unsigned int	height;
+} t_resolution;
+
+/***
+****	fov :			0 - 360
+****	direction :		0 - 360
+****	Maybe add other properties
+***/
+
+typedef struct s_player_info
+{
+	t_coordinates	pos;
+	unsigned short	fov;
+	unsigned short	direction;
+} t_player_info;
+
 /***
 ****	resolution :	[0] : width
 ****					[1] : height
@@ -59,17 +84,23 @@ typedef enum errcode
 ****					[3] : W
 ***/
 
-typedef struct map_info
+typedef struct s_map_info
 {
 	char			*raw;
-	unsigned int	width;
-	unsigned int	height;
+	t_resolution	map_resolution;
 	unsigned int	**map;
-	unsigned short	resolution[2];
+	t_resolution	win_resolution;
 	char			*tex_path[4];
-	unsigned short	ground_clr;
-	unsigned short	ceiling_clr;
+	unsigned int	ground_clr;
+	unsigned int	ceiling_clr;
 } t_map_info;
+
+typedef struct s_world
+{
+	t_map_info		map;
+	t_player_info	player;
+	
+} t_world;
 
 /******************************************************************************/
 /*			Function declarations											  */

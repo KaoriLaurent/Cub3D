@@ -14,6 +14,14 @@
 
 t_boolean	parsing(char *cub_raw)
 {
+	t_boolean	checklist[9];
+	t_counter	index;
 
+	index = 0;
+	while (index < 9)
+	{
+		checklist[index] = FALSE;
+		index += 1;
+	}
 	return (FALSE);
 }

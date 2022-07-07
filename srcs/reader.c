@@ -92,5 +92,6 @@ char	*read_file(char *filepath)
 			return (err_fr(ERR_READ, read));
 		read = ft_strfcat(read, c);
 	}
+	close(fd);
 	return (read);
 }
