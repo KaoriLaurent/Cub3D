@@ -13,14 +13,38 @@
 #include "../includes/cub3d.h"
 
 /*
-**	Return	:	-1 when invalid
-**				0 when skip line
-**				1 when proper line parsed
+**	Return	:	0 when skip line
+**				1 when proper element parsed
+**				2 when invalid
+**				3 when GNL dieded
+**				+10 when EOF reached
 */
 
-short	parse_next_line(char *cub_raw, t_counter step)
+unsigned short	parse_next_line(int fd, t_counter step)
 {
+	char	*line;
+	short	gnl_ret;
+	short	parse_retval;
 
+	gnl_ret = get_next_line(fd, &line);
+	if (step < 4)
+		parse_retval = parse_texture(line));
+	else if (step < 6)
+		parse_retval = parse_color(line));
+	else if (step == 6)
+		parse_retval = parse_map(line);
+	else if (step == 7)
+		parse_retval = parse_rest(line);
+	free(line);
+	if (gnl_ret == -1)
+	{
+		throw_error(ERR_GNL);
+		return(3)
+	}
+	else if (gnl_ret == 0)
+		return (10 + parse_retval);
+	else
+		return(parse_retval);
 }
 
 /*
@@ -32,22 +56,26 @@ short	parse_next_line(char *cub_raw, t_counter step)
 
 t_boolean	parsing(char *filepath)
 {
-	t_boolean	checklist[7];
 	t_counter	step;
-	int	fd;
 	short	last;
+	int	fd;
 
 	step = 0;
+	fd = open(filepath, O_RDONLY);
+	if (fd < 0)
+		return (throw_error(ERR_OPEN));
 	while (step < 8)
 	{
 		last = parse_next_line(fd, step);
-		if (last < 0)
+		if ((last % 10 == 2) || (last / 10 && step != 7) || last == 3)
 		{
-			throw_error(ERR_FILECONTENT);
+			close (fd);
+			if (last != 3)
+				throw_error(ERR_FILECONTENT);
 			return (FALSE);
 		}
-		else
-		step += last;
+		step += last % 10;
 	}
+	close(fd);
 	return (TRUE);
 }

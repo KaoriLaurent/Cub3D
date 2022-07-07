@@ -26,6 +26,8 @@ void	*throw_error(t_errorcode code)
 		printf("Malloc failed. Please check your RAM is properly installed.");
 	else if (code == ERR_MANY_ARG)
 		printf("Too many arguments.");
+	else if (code == ERR_GNL)
+		printf("Get_Next_Line failed. Blaming Antoine now.");
 	else if (code == ERR_FILEFORMAT)
 		printf("Wrong file format. And no, .caca is not a valid format.");
 	else if (code == ERR_FILEPATH)
