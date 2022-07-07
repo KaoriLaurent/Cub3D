@@ -127,4 +127,11 @@ char	*read_file(char *filepath);
 
 t_boolean	parsing(char *cub_raw);
 
+/*	angles_basic.c	*/
+
+short	angle_add(short one, short two);
+short	angle_sub(short one, short two);
+short	angle_mul(short one, short two);
+short	angle_div(short one, short two);
+
 #endif
