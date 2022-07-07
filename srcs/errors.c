@@ -6,37 +6,43 @@
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 01:57:18 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/07 01:57:18 by requinch         ###   ########.fr       */
+/*   Updated: 2022/07/08 01:23:12 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	*err_fr(t_errorcode code, void *ptr)
+void	*error_free(t_errorcode code, void *ptr)
 {
 	free(ptr);
 	return(throw_error(code));
 }
 
+int	error_int_ret(t_errorcode code, int ret)
+{
+	throw_error(code);
+	return (ret);
+}
+
 void	*throw_error(t_errorcode code)
 {
 	if (code == ERR_UNDEFINED)
-		printf("Undefined error. Plz just stop");
+		ft_putendl_fd("Undefined error. Plz just stop", 2);
 	else if (code == ERR_MALLOC)
-		printf("Malloc failed. Please check your RAM is properly installed.");
-	else if (code == ERR_MANY_ARG)
-		printf("Too many arguments.");
+		ft_putendl_fd("Malloc failed. Please check your RAM is installed.", 2);
+	else if (code == ERR_ARG)
+		ft_putendl_fd("Wrong number of arguments.", 2);
 	else if (code == ERR_GNL)
-		printf("Get_Next_Line failed. Blaming Antoine now.");
+		ft_putendl_fd("Get_Next_Line failed. Blaming Antoine now.", 2);
 	else if (code == ERR_FILEFORMAT)
-		printf("Wrong file format. And no, .caca is not a valid format.");
+		ft_putendl_fd("Wrong file format. .caca is not a valid format.", 2);
 	else if (code == ERR_FILEPATH)
-		printf("File path is invalid. Thought you were clever, huh.");
+		ft_putendl_fd("File path is invalid. Thought you were clever, huh.", 2);
 	else if (code == ERR_FILECONTENT)
-		printf("File contents are invalid. I won't parse that shit.");
+		ft_putendl_fd("File contents are invalid. I won't parse that shit.", 2);
 	else if (code == ERR_OPEN)
-		printf("Failed to open. Call the LockPickingLawyer or smth");
+		ft_putendl_fd("Failed to open. Call the LockPickingLawyer or smth", 2);
 	else if (code == ERR_READ)
-		printf("Failed to... read. Cmon dude. Yu-Gi-Oh players I swear");
+		ft_putendl_fd("Failed to... read. Yu-Gi-Oh players amirite", 2);
 	return (NULL);
 }

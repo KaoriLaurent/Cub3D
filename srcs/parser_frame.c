@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parser_frame.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 00:54:00 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/07 00:54:00 by requinch         ###   ########.fr       */
+/*   Updated: 2022/07/08 01:28:30 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ unsigned short	parse_next_line(int fd, t_counter step)
 		return (3);
 	}
 	if (step < 4)
-		parse_retval = parse_texture(line, step));
+		parse_retval = parse_texture(line, step);
 	else if (step < 6)
-		parse_retval = parse_color(line, step));
+		parse_retval = parse_color(line, step);
 	else if (step == 6)
 		parse_retval = parse_map(line);
 	else if (step == 7)
-		parse_retval = parse_rest(line);
+		parse_retval = parse_rest(line, gnl_ret);
 	free(line);
 	if (gnl_ret == 0)
 		return (10 + parse_retval);
@@ -63,9 +63,10 @@ t_boolean	parsing(char *filepath)
 	step = 0;
 	fd = open(filepath, O_RDONLY);
 	if (fd < 0)
-		return (throw_error(ERR_OPEN));
+		return (error_int_ret(ERR_OPEN, 0));
 	while (step < 8)
 	{
+		printf("Step %i\n", step);
 		last = parse_next_line(fd, step);
 		if ((last % 10 == 2) || (last / 10 && step != 7) || last == 3)
 		{

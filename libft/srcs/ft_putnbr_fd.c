@@ -6,7 +6,7 @@
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 18:50:41 by requinch          #+#    #+#             */
-/*   Updated: 2021/10/26 16:43:11 by requinch         ###   ########.fr       */
+/*   Updated: 2022/07/08 01:17:32 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	int	sign;
-
-	sign = 0;
 	if (n == 0)
 		ft_putchar_fd('0', fd);
 	if (n == -2147483648)

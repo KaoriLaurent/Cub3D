@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
+/*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 00:54:45 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/07 17:14:21 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/07/08 01:23:16 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 /******************************************************************************/
 
 # include "../libft/includes/libft.h"
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 
 /******************************************************************************/
 /*			Defines															  */
@@ -46,7 +49,7 @@ typedef enum	errcode
 {
 	ERR_UNDEFINED = 0,
 	ERR_MALLOC = 10,
-	ERR_MANY_ARG = 11,
+	ERR_ARG = 11,
 	ERR_GNL = 12,
 	ERR_FILEFORMAT = 20,
 	ERR_FILEPATH = 21,
@@ -115,7 +118,8 @@ typedef struct	s_world
 
 /*	errors.c			*/
 
-void		*err_fr(t_errorcode code, void *ptr);
+void		*error_free(t_errorcode code, void *ptr);
+int			error_int_ret(t_errorcode code, int ret);
 void		*throw_error(t_errorcode code);
 
 /*	reader.c			*/
@@ -131,7 +135,7 @@ t_boolean	parsing(char *cub_raw);
 short	parse_texture(char *line, t_counter step);
 short	parse_color(char *line, t_counter step);
 short	parse_map(char *line);
-short	parse_rest(char *line);
+short	parse_rest(char *line, short gnl_ret);
 
 /*	angles_basic.c		*/
 

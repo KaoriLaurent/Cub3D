@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gnl.c                                              :+:      :+:    :+:   */
+/*   reader.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 01:36:09 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/07 01:36:09 by requinch         ###   ########.fr       */
+/*   Updated: 2022/07/08 00:58:55 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ t_boolean	check_fileformat(char *filepath, char *expected)
 
 char	*read_file(char *filepath)
 {
-	char	*read;
+	char	*filecontent;
 	char	c;
 	short	fd;
 	short	readret;
@@ -78,20 +78,20 @@ char	*read_file(char *filepath)
 		return (throw_error(ERR_FILEPATH));
 	if (!check_fileformat(filepath, EXPECTED_FILEFORMAT))
 		return (throw_error(ERR_FILEFORMAT));
-	read = ft_calloc(1, sizeof(char));
-	if (!read)
+	filecontent = ft_calloc(1, sizeof(char));
+	if (!filecontent)
 		return (throw_error(ERR_MALLOC));
 	fd = open(filepath, O_RDONLY);
 	if (fd < 0)
-		return (err_fr(ERR_OPEN, read));
+		return (error_free(ERR_OPEN, filecontent));
 	readret = 1;
 	while (readret)
 	{
 		readret = read(fd, &c, 1);
 		if (readret < 0)
-			return (err_fr(ERR_READ, read));
-		read = ft_strfcat(read, c);
+			return (error_free(ERR_READ, filecontent));
+		filecontent = ft_strfcat(filecontent, &c);
 	}
 	close(fd);
-	return (read);
+	return (filecontent);
 }

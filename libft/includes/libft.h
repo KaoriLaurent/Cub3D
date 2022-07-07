@@ -6,7 +6,7 @@
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 17:12:37 by requinch          #+#    #+#             */
-/*   Updated: 2022/05/09 17:46:03 by requinch         ###   ########.fr       */
+/*   Updated: 2022/07/08 01:07:15 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,6 @@ int				ft_hexatoi(char *str, int j);
 char			*ft_itohexa(int nb);
 
 int				get_next_line(int fd, char **line);
-char			*ft_strdup(const char *s);
-char			*ft_substr(char const *s, unsigned int start, size_t len);
-char			*ft_strjoin(char const *s1, char const *s2);
 int				has_nl(char *str);
 
 #endif

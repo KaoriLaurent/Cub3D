@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
+/*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 16:56:44 by anbourge          #+#    #+#             */
-/*   Updated: 2022/07/07 18:03:36 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/07/08 00:30:19 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-t_vector	find_direction_vector(char direction, t_vector pos)
+/*t_vector	find_direction_vector(char direction, t_vector pos)
 {
 	t_vector	ret;
 	
@@ -45,4 +45,4 @@ t_camera	create_camera(t_vector pos, char direction)
 
 	dir = find_direction_vector(direction, pos);
 	
-}
+}*/

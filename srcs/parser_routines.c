@@ -6,7 +6,7 @@
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 17:50:14 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/07 17:50:14 by requinch         ###   ########.fr       */
+/*   Updated: 2022/07/08 01:32:34 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 short	parse_texture(char *line, t_counter step)
 {
 	t_counter	index;
+	int			fd;
 
 	index = 2;
 	if (!(*line))
@@ -26,10 +27,10 @@ short	parse_texture(char *line, t_counter step)
 	{
 		while (line[index] == ' ')
 			index++;
-		index = open(&line[index], O_RDONLY);
-		if (index < 0)
+		fd = open(&line[index], O_RDONLY);
+		if (fd < 0)
 			return (2);
-		close(index);
+		close(fd);
 		return (1);
 	}
 	return (2);
@@ -53,8 +54,8 @@ short	parse_color(char *line, t_counter step)
 		{
 			if (ft_atoi(&line[index]) < 0 || ft_atoi(&line[index]) > 255)
 				return (2);
-			index += 2 + ((ft_atoi(&line[index] / 10) > 0)
-				+ ((ft_atoi(&line[index] / 100) > 0);
+			index += 2 + ((ft_atoi(&line[index]) / 10) > 0)
+				+ ((ft_atoi(&line[index]) / 100) > 0);
 			c_nbr += 1;
 		}
 		return (1);
@@ -64,10 +65,21 @@ short	parse_color(char *line, t_counter step)
 
 short	parse_map(char *line)
 {
-
+	if (!(*line))
+		return (0);
+	/* Actual parsing algorithm here */
+	/* Test part, now skips the map until a line starting with 5 is encountered */
+	if (*line == '5')
+		return (1);
+	else
+		return (0); 
+	/* End test part, replace with return (1); later.*/
 }
 
-short	parse_rest(char *line)
+short	parse_rest(char *line, short gnl_ret)
 {
-
+	if (!(*line))
+		return ((gnl_ret == 0));
+	else
+		return (2);
 }

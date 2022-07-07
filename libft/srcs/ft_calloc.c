@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
+/*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 04:23:45 by requinch          #+#    #+#             */
-/*   Updated: 2022/03/23 17:03:11 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/07/08 01:17:08 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 void	*ft_calloc(size_t nmemb, size_t size)
 {
 	void	*ptr;
-	int		i;
 
-	i = 0;
 	if (!nmemb || !size)
 	{
 		nmemb = 1;

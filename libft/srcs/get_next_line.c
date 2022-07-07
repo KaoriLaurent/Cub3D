@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
+/*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 13:40:39 by anbourge          #+#    #+#             */
-/*   Updated: 2022/01/05 15:30:18 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/07/08 01:07:46 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+int	has_nl(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+		return (0);
+	while (str[i])
+	{
+		if (str[i] == '\n')
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
 static char	*ft_line(char **save, int fd)
 {

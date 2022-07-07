@@ -1,6 +1,6 @@
 NAME = cub3d
 
-_SRCS = main.c windows.c
+_SRCS = main.c errors.c parser_frame.c  parser_routines.c  reader.c angles_basic.c
 
 SRCS = $(addprefix srcs/, $(_SRCS))
 SRCO = $(SRCS:.c=.o)
@@ -12,14 +12,14 @@ all : $(NAME)
 
 sanitize : $(SRCO)
 	make -C libft
-	cc -o $(NAME) $(SRCO) libft/libft.a -lreadline -lm -fsanitize=address
+	cc -o $(NAME) $(SRCO) libft/libft.a -fsanitize=address
 
 $(NAME) : $(SRCO)
 	make -C libft
-	cc -o $(NAME) $(SRCO) -Lmlx -lmlx -framework OpenGL -framework AppKit libft/libft.a -lreadline -lm
+	cc -o $(NAME) $(SRCO) libft/libft.a
 
 %.o : %.c
-	cc $(FLAG) -Imlx -o $(NAME) -c $< -o $@ $(INC)
+	cc $(FLAG) -o $(NAME) -c $< -o $@ $(INC)
 
 clean :
 	/bin/rm -f $(SRCO)
