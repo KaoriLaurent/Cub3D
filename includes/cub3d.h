@@ -59,11 +59,11 @@ typedef enum	errcode
 /*			Structures														  */
 /******************************************************************************/
 
-typedef struct	s_vector
+typedef struct	s_position
 {
 	unsigned int	x;
 	unsigned int	y;
-} 				t_vector;
+} 				t_position;
 
 typedef struct	s_resolution
 {
@@ -77,16 +77,11 @@ typedef struct	s_resolution
 ****	Maybe add other properties
 ***/
 
-typedef struct s_camera
-{
-	t_vector	r_fov;
-	t_vector	l_fov;
-}				t_camera;
-
 typedef struct	s_player_info
 {
-	t_vector	pos;
-	t_camera	camera;
+	t_position	pos;
+	short		fov;
+	short		direction;
 }				t_player_info;
 
 /***
@@ -119,24 +114,31 @@ typedef struct	s_world
 /*			Function declarations											  */
 /******************************************************************************/
 
-/*	errors.c	*/
+/*	errors.c			*/
 
 void		*err_fr(t_errorcode code, void *ptr);
 void		*throw_error(t_errorcode code);
 
-/*	reader.c	*/
+/*	reader.c			*/
 
 char		*read_file(char *filepath);
 
-/*	parser.c	*/
+/*	parser_frame.c		*/
 
 t_boolean	parsing(char *cub_raw);
 
-/*	angles_basic.c	*/
+/*	parser_routines.c	*/
+
+short	parse_texture(char *line, t_counter step);
+short	parse_color(char *line, t_counter step);
+short	parse_map(char *line);
+short	parse_rest(char *line);
+
+/*	angles_basic.c		*/
 
 short	angle_add(short one, short two);
 short	angle_sub(short one, short two);
-short	angle_mul(short one, short two);
-short	angle_div(short one, short two);
+short	angle_mul(short one, short factor);
+short	angle_div(short one, short factor);
 
 #endif

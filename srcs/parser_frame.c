@@ -27,21 +27,21 @@ unsigned short	parse_next_line(int fd, t_counter step)
 	short	parse_retval;
 
 	gnl_ret = get_next_line(fd, &line);
-	if (step < 4)
-		parse_retval = parse_texture(line));
-	else if (step < 6)
-		parse_retval = parse_color(line));
-	else if (step == 6)
-		parse_retval = parse_map(line);
-	else if (step == 7)
-		parse_retval = parse_rest(line);
-	free(line);
 	if (gnl_ret == -1)
 	{
 		throw_error(ERR_GNL);
 		return(3)
 	}
-	else if (gnl_ret == 0)
+	if (step < 4)
+		parse_retval = parse_texture(line, step));
+	else if (step < 6)
+		parse_retval = parse_color(line, step));
+	else if (step == 6)
+		parse_retval = parse_map(line);
+	else if (step == 7)
+		parse_retval = parse_rest(line);
+	free(line);
+	if (gnl_ret == 0)
 		return (10 + parse_retval);
 	else
 		return(parse_retval);
