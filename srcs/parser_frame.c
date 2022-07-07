@@ -30,7 +30,7 @@ unsigned short	parse_next_line(int fd, t_counter step)
 	if (gnl_ret == -1)
 	{
 		throw_error(ERR_GNL);
-		return(3)
+		return (3);
 	}
 	if (step < 4)
 		parse_retval = parse_texture(line, step));

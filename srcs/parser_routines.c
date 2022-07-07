@@ -53,7 +53,7 @@ short	parse_color(char *line, t_counter step)
 		{
 			if (ft_atoi(&line[index]) < 0 || ft_atoi(&line[index]) > 255)
 				return (2);
-			index += 1 + ((ft_atoi(&line[index] / 10) > 0)
+			index += 2 + ((ft_atoi(&line[index] / 10) > 0)
 				+ ((ft_atoi(&line[index] / 100) > 0);
 			c_nbr += 1;
 		}

@@ -72,9 +72,8 @@ typedef struct	s_resolution
 }				t_resolution;
 
 /***
-****	fov :			0 - 360
-****	direction :		0 - 360
-****	Maybe add other properties
+****	fov :			0 - 359
+****	direction :		0 - 359
 ***/
 
 typedef struct	s_player_info
