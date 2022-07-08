@@ -1,2 +1,3 @@
 ✅	R	07/07	Ajouter libft la plus à jour
 X	R	08/07	Tester le parsing avec des maps valides & invalides
+X	R	08/07	Rework le parsing : ordre alternatif

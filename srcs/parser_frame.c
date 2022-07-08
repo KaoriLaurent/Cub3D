@@ -6,7 +6,7 @@
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 00:54:00 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/08 01:28:30 by requinch         ###   ########.fr       */
+/*   Updated: 2022/07/09 00:03:27 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,13 @@ unsigned short	parse_next_line(int fd, t_counter step)
 		throw_error(ERR_GNL);
 		return (3);
 	}
+	printf("Line : \"%s\"\n", line);
 	if (step < 4)
 		parse_retval = parse_texture(line, step);
 	else if (step < 6)
 		parse_retval = parse_color(line, step);
 	else if (step == 6)
-		parse_retval = parse_map(line);
+		parse_retval = parse_map(line, fd);
 	else if (step == 7)
 		parse_retval = parse_rest(line, gnl_ret);
 	free(line);
@@ -68,6 +69,10 @@ t_boolean	parsing(char *filepath)
 	{
 		printf("Step %i\n", step);
 		last = parse_next_line(fd, step);
+		if (last == 0)
+			printf("Skip\n");
+		else if (last == 1)
+			printf("OK\n");
 		if ((last % 10 == 2) || (last / 10 && step != 7) || last == 3)
 		{
 			close (fd);

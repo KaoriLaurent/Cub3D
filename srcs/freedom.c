@@ -1,33 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   angles_basic.c                                     :+:      :+:    :+:   */
+/*   freedom.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/07 18:08:06 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/08 16:45:09 by requinch         ###   ########.fr       */
+/*   Created: 2022/07/09 00:31:55 by requinch          #+#    #+#             */
+/*   Updated: 2022/07/09 00:33:29 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-short	angle_add(short one, short two)
+int	free_map(char **map)
 {
-	return ((one + two) % 3600);
-}
-
-short	angle_sub(short one, short two)
-{
-	return ((one - two) % 3600);
-}
-
-short	angle_mul(short one, short factor)
-{
-	return ((one * factor) % 3600);
-}
-
-short	angle_div(short one, short factor)
-{
-	return ((one / factor) % 3600);
+	
 }

@@ -6,19 +6,19 @@
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 17:50:14 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/08 01:32:34 by requinch         ###   ########.fr       */
+/*   Updated: 2022/07/09 00:03:38 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-short	parse_texture(char *line, t_counter step)
+short	parse_texture(char *line, t_counter step) //NOT GOOD : ANY ORDER POSSIBLE
 {
 	t_counter	index;
 	int			fd;
 
 	index = 2;
-	if (!(*line))
+	if (line && !line[0])
 		return (0);
 	if (line[0] && line[1] && ((step == 0 && line[0] == 'N' && line[1] == 'O')
 		|| (step == 1 && line[0] == 'S' && line[1] == 'O')
@@ -36,14 +36,14 @@ short	parse_texture(char *line, t_counter step)
 	return (2);
 }
 
-short	parse_color(char *line, t_counter step)
+short	parse_color(char *line, t_counter step) //NOT GOOD : ANY ORDER POSSIBLE
 {
 	t_counter	index;
 	t_counter	c_nbr;
 
 	index = 1;
 	c_nbr = 1;
-	if (!(*line))
+	if (line && !line[0])
 		return (0);
 	if (line[0] && ((step == 4 && line[0] == 'F')
 		|| (step == 5 && line[0] == 'C')))
@@ -63,22 +63,31 @@ short	parse_color(char *line, t_counter step)
 	return (2);
 }
 
-short	parse_map(char *line)
+short	parse_map(char *line, int fd)
 {
-	if (!(*line))
+	char	**map;
+	t_resolution	total;
+	int	gnl_ret;
+
+	map = calloc(1000, sizeof(char *));
+	total.height = 0;
+	gnl_ret = 1;
+	if (line && !line[0])
 		return (0);
-	/* Actual parsing algorithm here */
-	/* Test part, now skips the map until a line starting with 5 is encountered */
-	if (*line == '5')
-		return (1);
-	else
-		return (0); 
-	/* End test part, replace with return (1); later.*/
+	while (line && line[0] && gnl_ret)
+	{
+		map[total.height] = ft_strdup(line);
+		printf("Line : \"%s\"\n", line);
+		free(line);
+		gnl_ret = get_next_line(fd, &line);
+		total.height += 1;
+	}
+	return (check_the_map(map) + 10 * (gnl_ret == 0));
 }
 
 short	parse_rest(char *line, short gnl_ret)
 {
-	if (!(*line))
+	if (line && !line[0])
 		return ((gnl_ret == 0));
 	else
 		return (2);
