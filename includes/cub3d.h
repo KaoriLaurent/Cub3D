@@ -6,7 +6,7 @@
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 00:54:45 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/08 19:17:08 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/07/09 15:46:28 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,19 +70,25 @@ typedef enum	errcode
 
 typedef struct	s_position
 {
-	double	x;
-	double	y;
+	t_size	x;
+	t_size	y;
 } 				t_position;
+
+typedef struct	s_vector
+{
+	int	x;
+	int	y;
+}				t_vector;
 
 typedef struct	s_resolution
 {
-	unsigned int	width;
-	unsigned int	height;
+	t_size	width;
+	t_size	height;
 }				t_resolution;
 
 /***
-****	fov :			0 - 359
-****	direction :		0 - 359
+****	fov :			0 - 3599
+****	direction :		0 - 3599
 ***/
 
 typedef struct	s_player_info
@@ -105,7 +111,8 @@ typedef struct	s_map_info
 {
 	char			*raw;
 	t_resolution	map_res;
-	unsigned int	**map;
+	char			**map;
+	t_size			tile_size;
 	char			*tex_path[4];
 	unsigned int	ground_clr;
 	unsigned int	ceiling_clr;
@@ -158,7 +165,7 @@ t_boolean	parsing(char *cub_raw);
 
 short	parse_texture(char *line, t_counter step);
 short	parse_color(char *line, t_counter step);
-short	parse_map(char *line);
+short	parse_map(char *line, int fd);
 short	parse_rest(char *line, short gnl_ret);
 
 /*	angles_basic.c		*/
@@ -176,5 +183,14 @@ void	sprites();
 
 void	window_init(t_vars *vars);
 int		wclose(int keycode, t_vars *vars);
+
+/*	utils_parser.c		*/
+
+unsigned int	get_max_length(char **map);
+unsigned short	check_the_map(char **map);
+
+/*	freedom.c			*/
+
+int	free_map(char **map, int ret);
 
 #endif
