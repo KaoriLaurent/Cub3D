@@ -6,7 +6,7 @@
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 00:54:45 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/09 04:26:53 by requinch         ###   ########.fr       */
+/*   Updated: 2022/07/09 15:58:26 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ typedef struct	s_world
 
 void		*error_free(t_errorcode code, void *ptr);
 int			error_int_ret(t_errorcode code, int ret);
+int			error_int_free(t_errorcode code, int ret, void *ptr);
 void		*throw_error(t_errorcode code);
 
 /*	reader.c			*/
