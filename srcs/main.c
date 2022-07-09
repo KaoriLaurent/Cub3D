@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 03:24:43 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/08 01:33:02 by requinch         ###   ########.fr       */
+/*   Updated: 2022/07/09 15:56:13 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
+/*
 int	main(int ac, char **av)
 {
 	t_world	world;
@@ -25,4 +25,16 @@ int	main(int ac, char **av)
 	//fill in &map
 	//do stuff
 	return (1);
+}*/
+
+int	main()
+{
+	//t_vars		*vars;
+	
+	//vars = malloc(sizeof(t_vars));
+	//window_init(vars);
+	randomalgo();
+	//mlx_key_hook(vars->win, wclose, &vars);
+	//mlx_loop(vars->mlx);
+	return (0);
 }

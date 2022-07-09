@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   angles_basic.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 18:08:06 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/08 16:45:09 by requinch         ###   ########.fr       */
+/*   Updated: 2022/07/09 16:51:04 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+float	degtorad(short deg)
+{
+	float	f;
+	
+	f = deg * (PI / 180);
+	return (f);
+}
 
 short	angle_add(short one, short two)
 {
