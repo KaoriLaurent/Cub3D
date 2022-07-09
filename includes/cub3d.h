@@ -6,7 +6,7 @@
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 00:54:45 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/09 17:52:29 by requinch         ###   ########.fr       */
+/*   Updated: 2022/07/09 17:59:57 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,9 +141,9 @@ typedef struct s_vars {
 
 typedef struct	s_walls
 {
-	float	x;
-	float	y;
-	t_walls	*next;
+	float			x;
+	float			y;
+	struct t_walls	*next;
 } 				t_walls;
 
 /******************************************************************************/
