@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sprites.c                                          :+:      :+:    :+:   */
+/*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/07 16:41:06 by anbourge          #+#    #+#             */
-/*   Updated: 2022/07/08 18:10:30 by anbourge         ###   ########.fr       */
+/*   Created: 2022/07/08 17:27:01 by anbourge          #+#    #+#             */
+/*   Updated: 2022/07/08 18:28:47 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	*create_sprite(t_vars *vars, char *tex_path)
+void	window_init(t_vars *vars)
 {
-	void	*sprite;
-	int		pos[2];
+	vars->mlx = mlx_init();
+	vars->win = mlx_new_window(vars->mlx, WIN_WIDTH, WIN_HEIGHT, "Cub3D");
+}
 
-	sprite = mlx_xpm_file_to_image(vars->mlx, tex_path, &pos[0], &pos[1]);
-	return (sprite);
+int	wclose(int keycode, t_vars *vars)
+{
+	if (keycode == 53)
+	{
+		//mlx_destroy_image(vars->mlx, &vars->img);
+		mlx_destroy_window(vars->mlx, vars->win);
+		exit(0);
+	}
+	return (0);
 }

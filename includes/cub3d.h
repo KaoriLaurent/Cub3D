@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 00:54:45 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/08 01:23:16 by requinch         ###   ########.fr       */
+/*   Updated: 2022/07/08 19:17:08 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,18 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+# include <stdio.h>
+# include <math.h>
+# include <mlx.h>
 
 /******************************************************************************/
 /*			Defines															  */
 /******************************************************************************/
 
 # define EXPECTED_FILEFORMAT ".cub"
+# define WIN_WIDTH 1280
+# define WIN_HEIGHT 720
+# define PI 3.14159265
 
 /******************************************************************************/
 /*			Simple typedefs													  */
@@ -64,8 +70,8 @@ typedef enum	errcode
 
 typedef struct	s_position
 {
-	unsigned int	x;
-	unsigned int	y;
+	double	x;
+	double	y;
 } 				t_position;
 
 typedef struct	s_resolution
@@ -112,9 +118,27 @@ typedef struct	s_world
 	
 }				t_world;
 
+typedef struct	s_data {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_data;
+
+typedef struct s_vars {
+	void	*mlx;
+	void	*win;
+	t_data	img;
+}				t_vars;
+
 /******************************************************************************/
 /*			Function declarations											  */
 /******************************************************************************/
+
+/* algorithm.c			*/
+
+void		randomalgo();
 
 /*	errors.c			*/
 
@@ -143,5 +167,14 @@ short	angle_add(short one, short two);
 short	angle_sub(short one, short two);
 short	angle_mul(short one, short factor);
 short	angle_div(short one, short factor);
+
+/*	sprites				*/
+
+void	sprites();
+
+/*	window.c			*/
+
+void	window_init(t_vars *vars);
+int		wclose(int keycode, t_vars *vars);
 
 #endif
