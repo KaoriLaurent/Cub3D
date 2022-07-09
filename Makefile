@@ -16,15 +16,15 @@ all : $(NAME)
 
 mlx : $(SRCO_BASIC) $(SRCO_GFX)
 	make -C libft
-	cc -o $(NAME) $(SRCO) -Lmlx -lmlx -framework OpenGL -framework AppKit libft/libft.a
+	cc -o $(NAME) $(SRCO_BASIC) $(SRCO_GFX) -Lmlx -lmlx -framework OpenGL -framework AppKit libft/libft.a
 
 no_gfx : $(SRCO_BASIC)
 	make -C libft
-	cc -o $(NAME) $(SRCO) libft/libft.a
+	cc -o $(NAME) $(SRCO_BASIC) libft/libft.a
 
 no_gfx_sanitize : $(SRCO_BASIC)
 	make -C libft
-	cc -o $(NAME) $(SRCO) libft/libft.a -fsanitize=address
+	cc -o $(NAME) $(SRCO_BASIC) libft/libft.a -fsanitize=address
 
 %.o : %.c
 	cc $(FLAG) -Imlx -o $(NAME) -c $< -o $@ $(INC)
