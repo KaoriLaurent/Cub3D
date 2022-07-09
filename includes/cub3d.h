@@ -6,7 +6,7 @@
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 00:54:45 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/08 23:51:12 by requinch         ###   ########.fr       */
+/*   Updated: 2022/07/09 04:26:53 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,5 +155,9 @@ short	angle_div(short one, short factor);
 
 unsigned int	get_max_length(char **map);
 unsigned short	check_the_map(char **map);
+
+/*	freedom.c			*/
+
+int	free_map(char **map, int ret);
 
 #endif

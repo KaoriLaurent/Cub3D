@@ -1,6 +1,6 @@
 NAME = cub3d
 
-_SRCS = main.c errors.c parser_frame.c  parser_routines.c  reader.c angles_basic.c utils_parser.c
+_SRCS = main.c errors.c parser_frame.c  parser_routines.c  reader.c angles_basic.c utils_parser.c freedom.c
 
 SRCS = $(addprefix srcs/, $(_SRCS))
 SRCO = $(SRCS:.c=.o)

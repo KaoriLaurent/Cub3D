@@ -6,31 +6,11 @@
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 16:43:08 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/09 00:34:47 by requinch         ###   ########.fr       */
+/*   Updated: 2022/07/09 06:30:00 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-unsigned int	get_max_length(char **map) // Might wanna move this
-{
-	t_resolution	pos;
-	unsigned int	save;
-
-
-	pos.height = 0;
-	save = 0;
-	while (map[pos.height])
-	{
-		pos.width = 0;
-		while (map[pos.height][pos.width])
-			pos.width += 1;
-		if (pos.width > save) 
-			save = pos.width;
-		pos.height += 1;
-	}
-	return (save);
-}
 
 /*
 **	Mode	:	1 : All
@@ -39,47 +19,55 @@ unsigned int	get_max_length(char **map) // Might wanna move this
 
 t_boolean	check_map_character(char c, int mode)
 {
-	if (c == '1')
+	if (mode == 2 && c == '1')
 		return (TRUE);
-	if (mode == 1)
-		if (c == 32 || c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
-			return (TRUE);
+	else if (mode == 1 && (c == 32 || c == '0' || c == 'N' || c == 'S'
+		|| c == 'E' || c == 'W'))
+		return (TRUE);
 	return (FALSE);
 }
 
 t_boolean	check_general(char **map)
 {
 	t_position	pos;
+	t_boolean	start_pt;
 
 	pos.y = 0;
+	start_pt = FALSE;
 	while (map[pos.y])
 	{
 		pos.x = 0;
 		while (map[pos.y][pos.x])
 		{
+			if (map[pos.y][pos.x] == 'N' || map[pos.y][pos.x] == 'S'
+				|| map[pos.y][pos.x] == 'E' || map[pos.y][pos.x] == 'W')
+			{
+				if (start_pt == TRUE)
+					return (FALSE);
+				start_pt = TRUE;
+			}
 			if (check_map_character(map[pos.y][pos.x], 1) == FALSE)
 				return (FALSE);
 			pos.x += 1;
 		}
 		pos.y += 1;
 	}
-	return (TRUE);
+	return (start_pt);
 }
 
 unsigned short	check_the_map(char **map)
 {
-//	t_position	pos;
-//	t_vector	direction;
+/*	t_position	pos;
+	t_vector	direction;*/
 
-	if (check_general(map) == FALSE || map[0][0] != '1'
-		|| map[1][0] != '1' || map[0][1] != '1')
-		return (2);
-	return (1);
-/*	pos.x = 1;
-	pos.y = 1;
+	if (check_general(map) == FALSE)
+		return (free_map(map, 2));
+	/* Algo
+	pos.x = 0;
+	pos.y = 0;
 	direction.x = 1;
 	direction.y = 0;
-	if (check_map_character(map[pos.y][pos.x], 1) == FALSE)
-		return (2);
-	if (check_map_character(map[pos.y][pos.x], 2) == FALSE)*/
+	if (check_map_character(map[pos.y][pos.x], 2) == FALSE)
+	 End algo */
+	return (free_map(map, 1));
 }
