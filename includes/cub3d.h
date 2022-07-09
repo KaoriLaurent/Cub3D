@@ -6,7 +6,7 @@
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 00:54:45 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/09 15:46:28 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/07/09 17:02:36 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,12 @@ typedef struct	s_resolution
 ****	direction :		0 - 3599
 ***/
 
-typedef struct	s_player_info
+typedef struct	s_player
 {
 	t_position	pos;
 	short		fov;
 	short		direction;
-}				t_player_info;
+}				t_player;
 
 /***
 ****	resolution :	[0] : width
@@ -107,7 +107,7 @@ typedef struct	s_player_info
 ****					[3] : W
 ***/
 
-typedef struct	s_map_info
+typedef struct	s_map
 {
 	char			*raw;
 	t_resolution	map_res;
@@ -116,7 +116,7 @@ typedef struct	s_map_info
 	char			*tex_path[4];
 	unsigned int	ground_clr;
 	unsigned int	ceiling_clr;
-}				t_map_info;
+}				t_map;
 
 typedef struct	s_world
 {
@@ -138,6 +138,13 @@ typedef struct s_vars {
 	void	*win;
 	t_data	img;
 }				t_vars;
+
+typedef struct	s_walls
+{
+	float	x;
+	float	y;
+	t_walls	*next;
+} 				t_walls;
 
 /******************************************************************************/
 /*			Function declarations											  */
@@ -170,6 +177,7 @@ short	parse_rest(char *line, short gnl_ret);
 
 /*	angles_basic.c		*/
 
+float	degtorad(short deg);
 short	angle_add(short one, short two);
 short	angle_sub(short one, short two);
 short	angle_mul(short one, short factor);

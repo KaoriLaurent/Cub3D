@@ -6,7 +6,7 @@
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:48:58 by anbourge          #+#    #+#             */
-/*   Updated: 2022/07/09 15:44:07 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/07/09 17:14:14 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,27 +40,44 @@ int worldMap[24][24]=
   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 };
 
+t_position	next_intersection(short angle, t_player p, short r)
+{
+	t_position	pos;
+	
+	pos.x = p.x + (cos(degtorad(angle)) * (r / cos(angle)));
+	pos.y = p.y - (sin(degtorad(angle)) * (r / cose(angle)));
+	return (pos);
+}
+
+t_walls	*add_wall(t_walls *w, t_position pos)
+{
+	
+}
+
 void	randomalgo()
 {
-	double	pos[2];
-	//double	pd[2];
-	//double	pa;
-	//short	fov = 60;
-	//short	direction = 30;
-	int	ray[2];
+	float	pos[2];
+	int		ray[2];
+	//float	f;
+	int		i;
 	
 	pos[0] = 16;
 	pos[1] = 19;
 	ray[0] = pos[0];
 	ray[1] = pos[1];
+	i = 1;
 	while (worldMap[ray[0]][ray[1]] == 0)
 	{
-		
+		//f = cos(PI / 6) * (i / cos(30));
+		//printf("rayon = %f\n", f);
+		ray[0] = pos[0] - (sin(PI * (1.0/6.0)) * i);
+		ray[1] = pos[1] + (cos(PI * (1.0/6.0)) * i);
+		i++;
 	}
 	worldMap[ray[0]][ray[1]] = 3;
 	worldMap[16][19] = 4;
 	printf("first wall encountered : (%i, %i)\n", ray[0], ray[1]);
-	int	i = 0;
+	i = 0;
 	int	j = 0;
 	while (i < 24)
 	{
