@@ -6,7 +6,7 @@
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 00:54:45 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/09 17:02:36 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/07/11 16:15:47 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ typedef struct	s_player
 {
 	t_position	pos;
 	short		fov;
-	short		direction;
+	short		dir;
 }				t_player;
 
 /***
@@ -120,8 +120,8 @@ typedef struct	s_map
 
 typedef struct	s_world
 {
-	t_map_info		map;
-	t_player_info	player;
+	t_map		map;
+	t_player	player;
 	
 }				t_world;
 
@@ -143,7 +143,7 @@ typedef struct	s_walls
 {
 	float	x;
 	float	y;
-	t_walls	*next;
+	void	*next;
 } 				t_walls;
 
 /******************************************************************************/
@@ -152,6 +152,8 @@ typedef struct	s_walls
 
 /* algorithm.c			*/
 
+t_walls		*first_wall(t_position pos);
+t_walls		*add_wall(t_walls *w, t_position pos);
 void		randomalgo();
 
 /*	errors.c			*/

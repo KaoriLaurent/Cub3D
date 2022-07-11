@@ -6,7 +6,7 @@
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:48:58 by anbourge          #+#    #+#             */
-/*   Updated: 2022/07/09 17:14:14 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/07/11 16:32:50 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,39 +44,81 @@ t_position	next_intersection(short angle, t_player p, short r)
 {
 	t_position	pos;
 	
-	pos.x = p.x + (cos(degtorad(angle)) * (r / cos(angle)));
-	pos.y = p.y - (sin(degtorad(angle)) * (r / cose(angle)));
+	pos.x = p.pos.x + (cos(degtorad(angle)) * r);
+	pos.y = p.pos.y - (sin(degtorad(angle)) * r);
 	return (pos);
+}
+
+t_walls	*first_wall(t_position pos)
+{
+	t_walls	*wall;
+	
+	wall = malloc(sizeof(t_walls));
+	if (!wall)
+		return (throw_error(10));
+	wall->x = pos.x;
+	wall->y = pos.y;
+	wall->next = NULL;
+	return (wall);
 }
 
 t_walls	*add_wall(t_walls *w, t_position pos)
 {
-	
+	t_walls	*new;
+	t_walls	*tmp;
+
+	tmp = w;
+	while (tmp->next)
+	{
+		if (w->x == pos.x && w->y == pos.y)
+			return (w);
+		tmp = tmp->next;
+	}
+	new = malloc(sizeof(t_walls));
+	if (!new)
+		return (throw_error(10));
+	new->x = pos.x;
+	new->y = pos.y;
+	new->next = NULL;
+	tmp->next = new;
+	return (w);
 }
 
 void	randomalgo()
 {
-	float	pos[2];
 	int		ray[2];
-	//float	f;
+	t_player	player;
+	t_position	p;
+	//t_walls		*walls;
+	short	angle;
 	int		i;
 	
-	pos[0] = 16;
-	pos[1] = 19;
-	ray[0] = pos[0];
-	ray[1] = pos[1];
-	i = 1;
-	while (worldMap[ray[0]][ray[1]] == 0)
+	player.pos.x = 19;
+	player.pos.y = 16;
+	player.fov = 60;
+	player.dir = 270;
+	angle = player.dir - (player.fov / 2);
+	while (angle != (player.dir + (player.fov / 2)) + 1)
 	{
-		//f = cos(PI / 6) * (i / cos(30));
-		//printf("rayon = %f\n", f);
-		ray[0] = pos[0] - (sin(PI * (1.0/6.0)) * i);
-		ray[1] = pos[1] + (cos(PI * (1.0/6.0)) * i);
-		i++;
+		i = 1;
+		ray[0] = player.pos.y;
+		ray[1] = player.pos.x;
+		while (worldMap[ray[0]][ray[1]] == 0)
+		{
+			p = next_intersection(angle, player, i);
+			ray[0] = p.y;
+			ray[1] = p.x;
+			i++;
+		}
+		/*if (!walls)
+			walls = first_wall(p);
+		else
+			walls = add_wall(walls, p);*/
+		worldMap[ray[0]][ray[1]] = 3;
+		printf("first wall encountered with angle %i : (%i, %i)\n", angle, ray[0], ray[1]);
+		angle++;
 	}
-	worldMap[ray[0]][ray[1]] = 3;
 	worldMap[16][19] = 4;
-	printf("first wall encountered : (%i, %i)\n", ray[0], ray[1]);
 	i = 0;
 	int	j = 0;
 	while (i < 24)
