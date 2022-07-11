@@ -6,7 +6,7 @@
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 01:57:18 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/08 01:23:12 by requinch         ###   ########.fr       */
+/*   Updated: 2022/07/09 15:58:11 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@ void	*error_free(t_errorcode code, void *ptr)
 
 int	error_int_ret(t_errorcode code, int ret)
 {
+	throw_error(code);
+	return (ret);
+}
+
+int	error_int_free(t_errorcode code, int ret, void *ptr)
+{
+	free(ptr);
 	throw_error(code);
 	return (ret);
 }

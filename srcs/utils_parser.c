@@ -6,7 +6,7 @@
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 16:43:08 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/09 06:30:00 by requinch         ###   ########.fr       */
+/*   Updated: 2022/07/09 17:48:31 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_boolean	check_map_character(char c, int mode)
 	if (mode == 2 && c == '1')
 		return (TRUE);
 	else if (mode == 1 && (c == 32 || c == '0' || c == 'N' || c == 'S'
-		|| c == 'E' || c == 'W'))
+		|| c == 'E' || c == 'W' || c == '1'))
 		return (TRUE);
 	return (FALSE);
 }
@@ -39,8 +39,9 @@ t_boolean	check_general(char **map)
 		pos.x = 0;
 		while (map[pos.y][pos.x])
 		{
-			if (map[pos.y][pos.x] == 'N' || map[pos.y][pos.x] == 'S'
-				|| map[pos.y][pos.x] == 'E' || map[pos.y][pos.x] == 'W')
+			printf("Debug : checking pos (%i,%i) : %c\n", pos.x, pos.y, map[pos.y][pos.x]);
+			if ((map[pos.y][pos.x] == 'N' || map[pos.y][pos.x] == 'S'
+				|| map[pos.y][pos.x] == 'E' || map[pos.y][pos.x] == 'W'))
 			{
 				if (start_pt == TRUE)
 					return (FALSE);

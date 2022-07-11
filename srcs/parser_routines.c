@@ -6,7 +6,7 @@
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 17:50:14 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/09 05:49:29 by requinch         ###   ########.fr       */
+/*   Updated: 2022/07/09 17:50:09 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,13 @@ short	parse_map(char *line, int fd)
 	gnl_ret = 1;
 	if (line && !line[0])
 		return (0);
-	while (line && line[0] && gnl_ret)
+	while (line && line[0]) //ADD CONDITION ON GNL RET ?
 	{
 		map[total.height] = ft_strdup(line);
 		free(line);
 		gnl_ret = get_next_line(fd, &line);
+		if (gnl_ret == -1)
+			return (error_int_free(ERR_GNL, 3, line));
 		total.height += 1;
 	}
 	free(line);

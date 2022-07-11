@@ -6,7 +6,7 @@
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 00:54:45 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/11 16:15:47 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/07/11 16:54:27 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,7 @@ void		randomalgo();
 
 void		*error_free(t_errorcode code, void *ptr);
 int			error_int_ret(t_errorcode code, int ret);
+int			error_int_free(t_errorcode code, int ret, void *ptr);
 void		*throw_error(t_errorcode code);
 
 /*	reader.c			*/

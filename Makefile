@@ -1,26 +1,30 @@
 NAME = cub3d
 
-_SRCS = main.c errors.c parser_frame.c  parser_routines.c  reader.c angles_basic.c algorithm.c sprites.c window.c utils_parser.c freedom.c
+_SRCS_GFX = algorithm.c sprites.c window.c 
+_SRCS_BASIC = main.c errors.c parser_frame.c  parser_routines.c  reader.c angles_basic.c utils_parser.c freedom.c
 
-SRCS = $(addprefix srcs/, $(_SRCS))
-SRCO = $(SRCS:.c=.o)
+SRCS_GFX = $(addprefix srcs/, $(_SRCS_GFX))
+SRCS_BASIC = $(addprefix srcs/, $(_SRCS_BASIC))
+
+SRCO_GFX = $(SRCS_GFX:.c=.o)
+SRCO_BASIC = $(SRCS_BASIC:.c=.o)
 
 FLAG = -Wall -Wextra -Werror
 INC = -I includes/
 
 all : $(NAME)
 
-mlx : $(SRCO)
+mlx : $(SRCO_BASIC) $(SRCO_GFX)
 	make -C libft
-	cc -o $(NAME) $(SRCO) -Lmlx -lmlx -framework OpenGL -framework AppKit libft/libft.a
+	cc -o $(NAME) $(SRCO_BASIC) $(SRCO_GFX) -Lmlx -lmlx -framework OpenGL -framework AppKit libft/libft.a
 
-sanitize : $(SRCO)
+no_gfx : $(SRCO_BASIC)
 	make -C libft
-	cc -o $(NAME) $(SRCO) libft/libft.a -fsanitize=address
+	cc -o $(NAME) $(SRCO_BASIC) libft/libft.a
 
-$(NAME) : $(SRCO)
+no_gfx_sanitize : $(SRCO_BASIC)
 	make -C libft
-	cc -o $(NAME) $(SRCO) libft/libft.a
+	cc -o $(NAME) $(SRCO_BASIC) libft/libft.a -fsanitize=address
 
 %.o : %.c
 	cc $(FLAG) -Imlx -o $(NAME) -c $< -o $@ $(INC)
@@ -38,4 +42,4 @@ re : fclean all
 rcl : re
 	make clean
 
-.PHONY: make clean fclean re rcl sanitize mlx
+.PHONY: make clean fclean re rcl sanitize mlx no_gfx
