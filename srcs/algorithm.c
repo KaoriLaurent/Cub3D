@@ -6,7 +6,7 @@
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:48:58 by anbourge          #+#    #+#             */
-/*   Updated: 2022/07/11 16:32:50 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/07/12 18:03:41 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,65 +40,22 @@ int worldMap[24][24]=
   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 };
 
-t_position	next_intersection(short angle, t_player p, short r)
-{
-	t_position	pos;
-	
-	pos.x = p.pos.x + (cos(degtorad(angle)) * r);
-	pos.y = p.pos.y - (sin(degtorad(angle)) * r);
-	return (pos);
-}
-
-t_walls	*first_wall(t_position pos)
-{
-	t_walls	*wall;
-	
-	wall = malloc(sizeof(t_walls));
-	if (!wall)
-		return (throw_error(10));
-	wall->x = pos.x;
-	wall->y = pos.y;
-	wall->next = NULL;
-	return (wall);
-}
-
-t_walls	*add_wall(t_walls *w, t_position pos)
-{
-	t_walls	*new;
-	t_walls	*tmp;
-
-	tmp = w;
-	while (tmp->next)
-	{
-		if (w->x == pos.x && w->y == pos.y)
-			return (w);
-		tmp = tmp->next;
-	}
-	new = malloc(sizeof(t_walls));
-	if (!new)
-		return (throw_error(10));
-	new->x = pos.x;
-	new->y = pos.y;
-	new->next = NULL;
-	tmp->next = new;
-	return (w);
-}
-
-void	randomalgo()
+t_rays	*randomalgo()
 {
 	int		ray[2];
 	t_player	player;
 	t_position	p;
-	//t_walls		*walls;
-	short	angle;
+	t_rays	*r;
+	float	angle;
 	int		i;
 	
+	r = NULL;
 	player.pos.x = 19;
 	player.pos.y = 16;
-	player.fov = 60;
-	player.dir = 270;
-	angle = player.dir - (player.fov / 2);
-	while (angle != (player.dir + (player.fov / 2)) + 1)
+	player.fov = 60.000;
+	player.dir = 90.000;
+	angle = player.dir - (player.fov / 2.000);
+	while ((int)angle != (int)(player.dir + (player.fov / 2.000)) + 1.000)
 	{
 		i = 1;
 		ray[0] = player.pos.y;
@@ -110,13 +67,14 @@ void	randomalgo()
 			ray[1] = p.x;
 			i++;
 		}
-		/*if (!walls)
-			walls = first_wall(p);
+		if (!r)
+			r = first_ray(p, player.pos, ray);
 		else
-			walls = add_wall(walls, p);*/
+			r = add_ray(r, p, player.pos, ray);
 		worldMap[ray[0]][ray[1]] = 3;
-		printf("first wall encountered with angle %i : (%i, %i)\n", angle, ray[0], ray[1]);
-		angle++;
+		//printf("angle = %f\n", angle);
+		//printf("first wall encountered with angle %i : (%i, %i)\n", angle, ray[0], ray[1]);
+		angle += 0.100;
 	}
 	worldMap[16][19] = 4;
 	i = 0;
@@ -132,4 +90,5 @@ void	randomalgo()
 		printf("\n");
 		i++;
 	}
+	return (r);
 }

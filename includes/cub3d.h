@@ -6,7 +6,7 @@
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 00:54:45 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/11 16:54:27 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/07/12 17:51:57 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ typedef enum	errcode
 
 typedef struct	s_position
 {
-	t_size	x;
-	t_size	y;
+	float	x;
+	float	y;
 } 				t_position;
 
 typedef struct	s_vector
@@ -94,8 +94,8 @@ typedef struct	s_resolution
 typedef struct	s_player
 {
 	t_position	pos;
-	short		fov;
-	short		dir;
+	float		fov;
+	float		dir;
 }				t_player;
 
 /***
@@ -139,12 +139,15 @@ typedef struct s_vars {
 	t_data	img;
 }				t_vars;
 
-typedef struct	s_walls
+typedef struct	s_rays
 {
 	float	x;
 	float	y;
+	float	dist;
+	short	wall_x;
+	short	wall_y;
 	void	*next;
-} 				t_walls;
+} 				t_rays;
 
 /******************************************************************************/
 /*			Function declarations											  */
@@ -152,9 +155,7 @@ typedef struct	s_walls
 
 /* algorithm.c			*/
 
-t_walls		*first_wall(t_position pos);
-t_walls		*add_wall(t_walls *w, t_position pos);
-void		randomalgo();
+t_rays		*randomalgo();
 
 /*	errors.c			*/
 
@@ -162,6 +163,10 @@ void		*error_free(t_errorcode code, void *ptr);
 int			error_int_ret(t_errorcode code, int ret);
 int			error_int_free(t_errorcode code, int ret, void *ptr);
 void		*throw_error(t_errorcode code);
+
+/*	graphics.c			*/
+
+void		graphics(t_rays *r, t_vars *vars);
 
 /*	reader.c			*/
 
@@ -178,6 +183,12 @@ short	parse_color(char *line, t_counter step);
 short	parse_map(char *line, int fd);
 short	parse_rest(char *line, short gnl_ret);
 
+/*	raycasting.c		*/
+
+t_position	next_intersection(float angle, t_player p, int r);
+t_rays		*first_ray(t_position pos, t_position player_pos, int *wall);
+t_rays		*add_ray(t_rays *r, t_position pos, t_position player_pos, int *wall);
+
 /*	angles_basic.c		*/
 
 float	degtorad(short deg);
@@ -190,10 +201,15 @@ short	angle_div(short one, short factor);
 
 void	sprites();
 
+/*	utils.c				*/
+
+int		isInteger(float f);
+
 /*	window.c			*/
 
 void	window_init(t_vars *vars);
 int		wclose(int keycode, t_vars *vars);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 /*	utils_parser.c		*/
 

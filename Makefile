@@ -1,7 +1,8 @@
 NAME = cub3d
 
 _SRCS_GFX = algorithm.c sprites.c window.c 
-_SRCS_BASIC = main.c errors.c parser_frame.c  parser_routines.c  reader.c angles_basic.c utils_parser.c freedom.c
+_SRCS_BASIC = my_main.c errors.c parser_frame.c  parser_routines.c  reader.c angles_basic.c utils_parser.c freedom.c graphics.c \
+raycasting.c utils.c
 
 SRCS_GFX = $(addprefix srcs/, $(_SRCS_GFX))
 SRCS_BASIC = $(addprefix srcs/, $(_SRCS_BASIC))
