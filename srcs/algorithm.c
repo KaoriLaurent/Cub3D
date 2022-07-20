@@ -6,7 +6,7 @@
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:48:58 by anbourge          #+#    #+#             */
-/*   Updated: 2022/07/20 16:54:22 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/07/20 16:59:06 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_rays	*randomalgo()
 	player.pos.x = 19;
 	player.pos.y = 16;
 	player.fov = 60.000;
-	player.dir = 210.000;
+	player.dir = 90.000;
 	angle = player.dir - (player.fov / 2.000);
 	while ((int)angle != (int)(player.dir + (player.fov / 2.000)) + 1.000)
 	{

@@ -6,7 +6,7 @@
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 15:19:59 by anbourge          #+#    #+#             */
-/*   Updated: 2022/07/20 16:52:25 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/07/20 16:59:30 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,20 @@ void	graphics(t_rays *r, t_vars *vars)
 		{
 			while (++j < 2)
 			{
-				k = start - 1;
-				while (k < end)
+				k = -1;
+				while (k < start)
+					my_mlx_pixel_put(&vars->img, l, ++k, 0x0000B5E2);
+				k--;
+				while (k <= end)
 				{
 					if (r->wall_x == 23 || r->wall_y == 23 || r->wall_x == 0 || r->wall_y == 0)
 						my_mlx_pixel_put(&vars->img, l, ++k, color[0]);
 					else
 						my_mlx_pixel_put(&vars->img, l, ++k, color[1]);
 				}
+				k--;
+				while (k <= 720)
+					my_mlx_pixel_put(&vars->img, l, ++k, 0x00009A17);
 				l--;
 			}
 		}
@@ -57,14 +63,20 @@ void	graphics(t_rays *r, t_vars *vars)
 		{
 			while (++j < 3)
 			{
-				k = start - 1;
-				while (k < end)
+				k = -1;
+				while (k < start)
+					my_mlx_pixel_put(&vars->img, l, ++k, 0x0000B5E2);
+				k--;
+				while (k <= end)
 				{
 					if (r->wall_x == 23 || r->wall_y == 23 || r->wall_x == 0 || r->wall_y == 0)
 						my_mlx_pixel_put(&vars->img, l, ++k, color[0]);
 					else
 						my_mlx_pixel_put(&vars->img, l, ++k, color[1]);
 				}
+				k--;
+				while (k <= 720)
+					my_mlx_pixel_put(&vars->img, l, ++k, 0x00009A17);
 				l--;
 			}
 		}
