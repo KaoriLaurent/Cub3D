@@ -6,7 +6,7 @@
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 15:19:59 by anbourge          #+#    #+#             */
-/*   Updated: 2022/07/12 17:57:06 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/07/20 16:52:25 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	graphics(t_rays *r, t_vars *vars)
 		end = (lh / 2) + (720 / 2);
 		if (end >= 720)
 			end = 719;
-		printf("for ray %i : start = %i, end = %i, dist %f\n", i, start, end, r->dist);
 		j = -1;
+		//printf("Distance ray (%f,%f) = %f\n", r->x, r->y, r->dist);
 		if (i % 6 == 0)
 		{
 			while (++j < 2)
@@ -45,7 +45,7 @@ void	graphics(t_rays *r, t_vars *vars)
 				k = start - 1;
 				while (k < end)
 				{
-					if (r->wall_x == 0 || r->wall_x == 24 || r->wall_y == 0 || r->wall_y == 24)
+					if (r->wall_x == 23 || r->wall_y == 23 || r->wall_x == 0 || r->wall_y == 0)
 						my_mlx_pixel_put(&vars->img, l, ++k, color[0]);
 					else
 						my_mlx_pixel_put(&vars->img, l, ++k, color[1]);
@@ -60,7 +60,7 @@ void	graphics(t_rays *r, t_vars *vars)
 				k = start - 1;
 				while (k < end)
 				{
-					if (r->wall_x == 0 || r->wall_x == 24 || r->wall_y == 0 || r->wall_y == 24)
+					if (r->wall_x == 23 || r->wall_y == 23 || r->wall_x == 0 || r->wall_y == 0)
 						my_mlx_pixel_put(&vars->img, l, ++k, color[0]);
 					else
 						my_mlx_pixel_put(&vars->img, l, ++k, color[1]);

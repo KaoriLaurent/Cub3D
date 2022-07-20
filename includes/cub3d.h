@@ -6,7 +6,7 @@
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 00:54:45 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/12 17:51:57 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/07/20 16:41:36 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ typedef struct	s_rays
 	float	dist;
 	short	wall_x;
 	short	wall_y;
+	int		side;
 	void	*next;
 } 				t_rays;
 
@@ -185,13 +186,14 @@ short	parse_rest(char *line, short gnl_ret);
 
 /*	raycasting.c		*/
 
-t_position	next_intersection(float angle, t_player p, int r);
+t_position	next_intersection(float angle, t_player p, float r);
 t_rays		*first_ray(t_position pos, t_position player_pos, int *wall);
 t_rays		*add_ray(t_rays *r, t_position pos, t_position player_pos, int *wall);
+float		set_r(float angle, t_position pos, int i, int a);
 
 /*	angles_basic.c		*/
 
-float	degtorad(short deg);
+float	degtorad(float deg);
 short	angle_add(short one, short two);
 short	angle_sub(short one, short two);
 short	angle_mul(short one, short factor);
