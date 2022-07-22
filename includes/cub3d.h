@@ -6,7 +6,7 @@
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 00:54:45 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/20 16:41:36 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/07/22 18:25:45 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,13 +150,20 @@ typedef struct	s_rays
 	void	*next;
 } 				t_rays;
 
+typedef struct	s_all
+{
+	t_vars		*vars;
+	t_player	*player;
+}				t_all;
+
+
 /******************************************************************************/
 /*			Function declarations											  */
 /******************************************************************************/
 
 /* algorithm.c			*/
 
-t_rays		*randomalgo();
+t_rays		*randomalgo(t_player *pp);
 
 /*	errors.c			*/
 
@@ -168,6 +175,12 @@ void		*throw_error(t_errorcode code);
 /*	graphics.c			*/
 
 void		graphics(t_rays *r, t_vars *vars);
+
+/*	movements.c			*/
+
+int			my_key_hook(int keycode, t_all *all);
+void		player_movements(int keycode , t_all *a);
+int			render_next_frame(void *YourStruct);
 
 /*	reader.c			*/
 
@@ -210,7 +223,6 @@ int		isInteger(float f);
 /*	window.c			*/
 
 void	window_init(t_vars *vars);
-int		wclose(int keycode, t_vars *vars);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 /*	utils_parser.c		*/

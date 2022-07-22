@@ -1,8 +1,7 @@
 NAME = cub3d
 
-_SRCS_GFX = algorithm.c sprites.c window.c 
-_SRCS_BASIC = my_main.c errors.c parser_frame.c  parser_routines.c  reader.c angles_basic.c utils_parser.c freedom.c graphics.c \
-raycasting.c utils.c
+_SRCS_GFX = algorithm.c sprites.c window.c raycasting.c graphics.c movements.c
+_SRCS_BASIC = my_main.c errors.c parser_frame.c  parser_routines.c reader.c angles_basic.c utils_parser.c freedom.c utils.c 
 
 SRCS_GFX = $(addprefix srcs/, $(_SRCS_GFX))
 SRCS_BASIC = $(addprefix srcs/, $(_SRCS_BASIC))
@@ -31,7 +30,7 @@ no_gfx_sanitize : $(SRCO_BASIC)
 	cc $(FLAG) -Imlx -o $(NAME) -c $< -o $@ $(INC)
 
 clean :
-	/bin/rm -f $(SRCO)
+	/bin/rm -f $(SRCO_GFX) $(SRCO_BASIC)
 	make clean -C libft
 
 fclean : clean

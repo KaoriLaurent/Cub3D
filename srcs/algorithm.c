@@ -6,7 +6,7 @@
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:48:58 by anbourge          #+#    #+#             */
-/*   Updated: 2022/07/20 16:59:06 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/07/22 18:20:11 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int worldMap[24][24]=
   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 };
 
-t_rays	*randomalgo()
+t_rays	*randomalgo(t_player *pp)
 {
 	int		ray[3];
 	t_player	player;
@@ -50,10 +50,10 @@ t_rays	*randomalgo()
 	float	r;
 	
 	rays = NULL;
-	player.pos.x = 19;
-	player.pos.y = 16;
-	player.fov = 60.000;
-	player.dir = 90.000;
+	player.pos.x = pp->pos.x;
+	player.pos.y = pp->pos.y;
+	player.fov = pp->fov;
+	player.dir = pp->dir;
 	angle = player.dir - (player.fov / 2.000);
 	while ((int)angle != (int)(player.dir + (player.fov / 2.000)) + 1.000)
 	{
@@ -79,8 +79,9 @@ t_rays	*randomalgo()
 		angle += 0.10;
 	}
 	worldMap[16][19] = 4;
-	int k = 0;
+	/*int k = 0;
 	int	j = 0;
+	printf("MAP :\n");
 	while (k < 24)
 	{
 		j = 0;
@@ -92,5 +93,6 @@ t_rays	*randomalgo()
 		printf("\n");
 		k++;
 	}
+	printf("\n");*/
 	return (rays);
 }
