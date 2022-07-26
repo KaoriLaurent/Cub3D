@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 16:43:08 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/09 17:48:31 by requinch         ###   ########.fr       */
+/*   Updated: 2022/07/26 11:51:13 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,29 +29,29 @@ t_boolean	check_map_character(char c, int mode)
 
 t_boolean	check_general(char **map)
 {
-	t_position	pos;
+	int			pos[2];
 	t_boolean	start_pt;
 
-	pos.y = 0;
+	pos[0] = 0;
 	start_pt = FALSE;
-	while (map[pos.y])
+	while (map[pos[0]])
 	{
-		pos.x = 0;
-		while (map[pos.y][pos.x])
+		pos[1] = 0;
+		while (map[pos[0]][pos[1]])
 		{
-			printf("Debug : checking pos (%i,%i) : %c\n", pos.x, pos.y, map[pos.y][pos.x]);
-			if ((map[pos.y][pos.x] == 'N' || map[pos.y][pos.x] == 'S'
-				|| map[pos.y][pos.x] == 'E' || map[pos.y][pos.x] == 'W'))
+			printf("Debug : checking pos (%i,%i) : %c\n", pos[1], pos[0], map[pos[0]][pos[1]]);
+			if ((map[pos[0]][pos[1]] == 'N' || map[pos[0]][pos[1]] == 'S'
+				|| map[pos[0]][pos[1]] == 'E' || map[pos[0]][pos[1]] == 'W'))
 			{
 				if (start_pt == TRUE)
 					return (FALSE);
 				start_pt = TRUE;
 			}
-			if (check_map_character(map[pos.y][pos.x], 1) == FALSE)
+			if (check_map_character(map[pos[0]][pos[1]], 1) == FALSE)
 				return (FALSE);
-			pos.x += 1;
+			pos[1] += 1;
 		}
-		pos.y += 1;
+		pos[0] += 1;
 	}
 	return (start_pt);
 }

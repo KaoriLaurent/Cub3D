@@ -6,7 +6,7 @@
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 17:11:01 by anbourge          #+#    #+#             */
-/*   Updated: 2022/07/22 18:50:13 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/07/26 13:18:38 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,49 @@ int	my_key_hook(int keycode, t_all *all)
 	return (0);
 }
 
+int		is_wall(float x, float y)
+{
+	int	pos[2];
+
+	pos[0] = (int)y;
+	pos[1] = (int)x;
+	if (worldMap[pos[0]][pos[1]] != 0)
+		return (0);
+	pos[0] = (int)(y + 0.5);
+	pos[1] = (int)(x + 0.5);
+	if (worldMap[pos[0]][pos[1]] != 0)
+		return (0);
+		pos[0] = (int)(y + 0.5);
+	pos[1] = (int)(x + 0.5);
+	if (worldMap[pos[0]][pos[1]] != 0)
+		return (0);
+	return (1);
+}
+
 void	player_movements(int keycode , t_all *a)
 {
-	if (keycode == 13)
-		a->player->pos.y -= 0.3;
-	if (keycode == 0)
-		a->player->pos.x -= 0.3;
-	if (keycode == 1)
-		a->player->pos.y += 0.3;
-	if (keycode == 2)
-		a->player->pos.x += 0.3;
+	if (keycode == 13 && is_wall(a->player->pos.x, a->player->pos.y - 0.5))
+		a->player->pos.y -= 0.5;
+	if (keycode == 0 && is_wall(a->player->pos.x - 0.5, a->player->pos.y))
+		a->player->pos.x -= 0.5;
+	if (keycode == 1 && is_wall(a->player->pos.x, a->player->pos.y + 0.5))
+		a->player->pos.y += 0.5;
+	if (keycode == 2 && is_wall(a->player->pos.x + 0.5, a->player->pos.y))
+		a->player->pos.x += 0.5;
+	if (keycode == 123)
+	{
+		if (a->player->dir + 5.0 <= 360.0)
+			a->player->dir += 5.0;
+		else
+			a->player->dir = a->player->dir + 5.0 - 360.0;
+	}
+	if (keycode == 124)
+	{
+		if (a->player->dir - 5.0 >= 0)
+			a->player->dir -= 5.0;
+		else
+			a->player->dir = 360.0 - (a->player->dir - 5.0);
+	}
 }
 
 int	render_next_frame(void *s)
