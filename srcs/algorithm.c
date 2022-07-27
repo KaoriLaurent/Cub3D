@@ -6,11 +6,34 @@
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:48:58 by anbourge          #+#    #+#             */
-/*   Updated: 2022/07/26 12:47:29 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/07/28 01:20:39 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+float	get_dir(float dir, int input)
+{
+	if (input == 3)
+	{
+		dir -= 90.0f;
+		if (dir < 0.0f)
+			dir = 360.0f + dir;
+	}
+	else if (input == 2)
+	{
+		dir += 180.0f;
+		if (dir > 360.0f)
+			dir = dir - 360.0f;
+	}
+	else if (input == 1)
+	{
+		dir += 90.0f;
+		if (dir > 360.0f)
+			dir = dir - 360.0f;
+	}
+	return (degtorad(dir));
+}
 
 t_rays	*randomalgo(t_player *pp)
 {

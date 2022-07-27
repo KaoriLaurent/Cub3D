@@ -6,7 +6,7 @@
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 00:54:45 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/26 12:47:58 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/07/28 00:37:49 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,7 @@ static int worldMap[24][24]=
 
 /* algorithm.c			*/
 
+float		get_dir(float dir, int input);
 t_rays		*randomalgo(t_player *pp);
 
 /*	errors.c			*/
