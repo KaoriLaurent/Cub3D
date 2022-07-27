@@ -6,7 +6,7 @@
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 17:11:01 by anbourge          #+#    #+#             */
-/*   Updated: 2022/07/28 01:20:47 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/07/28 01:29:39 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	player_movements(int keycode , t_all *a)
 		if (a->player->dir - 5.0 >= 0)
 			a->player->dir -= 5.0;
 		else
-			a->player->dir = 360.0 - (a->player->dir - 5.0);
+			a->player->dir = 360.0 + (a->player->dir - 5.0);
 	}
 }
 
