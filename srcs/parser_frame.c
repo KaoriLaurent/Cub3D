@@ -6,7 +6,7 @@
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 00:54:00 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/30 00:39:43 by requinch         ###   ########.fr       */
+/*   Updated: 2022/07/31 19:25:28 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,8 @@ unsigned short	parse_next_line(int fd, t_counter step)
 		throw_error(ERR_GNL);
 		return (3);
 	}
-	if (step < 4)
-		parse_retval = parse_texture(line, step);
-	else if (step < 6)
-		parse_retval = parse_color(line, step);
+	if (step < 6)
+		parse_retval = parse_upper(line);
 	else if (step == 6)
 		parse_retval = parse_map(line, fd);
 	else if (step == 7 && gnl_ret != 0)

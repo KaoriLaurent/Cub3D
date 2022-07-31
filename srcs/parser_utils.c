@@ -6,7 +6,7 @@
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 00:39:27 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/31 04:06:02 by requinch         ###   ########.fr       */
+/*   Updated: 2022/07/31 20:01:47 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_boolean	is_edge(char **map, t_vector pos)
 {
-	if (pos.x == 0 || pos.x == 0
+	if (pos.x == 0 || pos.y == 0
 		|| !map[pos.y][pos.x + 1] || !map[pos.y + 1]) // ??????
 		return (TRUE);
 	return (FALSE);

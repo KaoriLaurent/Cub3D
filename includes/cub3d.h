@@ -6,7 +6,7 @@
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 00:54:45 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/31 06:01:50 by requinch         ###   ########.fr       */
+/*   Updated: 2022/07/31 19:30:20 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,8 @@ typedef struct	s_player
 /***
 ****	tex_path :		[0] : N
 ****					[1] : S
-****					[2] : E
-****					[3] : W
+****					[2] : W
+****					[3] : E
 ***/
 
 typedef struct	s_map
@@ -231,6 +231,7 @@ unsigned short	check_the_map(char **map);
 
 short	parse_texture(char *line, t_counter step);
 short	parse_color(char *line, t_counter step);
+short	parse_upper(char *line);
 short	parse_map(char *line, int fd);
 short	parse_rest(char *line, short gnl_ret);
 

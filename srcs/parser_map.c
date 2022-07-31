@@ -6,7 +6,7 @@
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 16:43:08 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/31 04:11:10 by requinch         ###   ########.fr       */
+/*   Updated: 2022/07/31 20:03:30 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ t_vector	get_starting_pos(char **map)
 
 t_boolean	recursive_check(char **map, t_vector pos, t_counter step)
 {
-	if ((map[pos.y][pos.x] == 32 || map[pos.y][pos.x] == 0)
+	if ((map[pos.y][pos.x] == ' ' || map[pos.y][pos.x] == '0')
 		&& is_edge(map, pos))
 		return (FALSE);
 	if (map[pos.y][pos.x] == '1' || map[pos.y][pos.x] == '2')
