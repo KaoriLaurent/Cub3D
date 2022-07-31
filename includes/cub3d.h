@@ -6,7 +6,7 @@
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 00:54:45 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/31 03:52:19 by requinch         ###   ########.fr       */
+/*   Updated: 2022/07/31 06:01:50 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,6 @@ typedef struct	s_player
 }				t_player;
 
 /***
-****	resolution :	[0] : width
-****					[1] : height
 ****	tex_path :		[0] : N
 ****					[1] : S
 ****					[2] : E
@@ -110,7 +108,6 @@ typedef struct	s_player
 typedef struct	s_map
 {
 	char			*raw;
-	t_resolution	map_res;
 	int				**map;
 	t_position		start_pos;
 	char			*tex_path[4];
@@ -192,6 +189,13 @@ static int worldMap[24][24]=
 
 float		get_dir(float dir, int input);
 t_rays		*randomalgo(t_player *pp);
+
+/*	filling_utils.c 	*/
+
+char	*get_next_element(char	*raw);
+char	*get_texpath(char *raw);
+
+/*	filling.c			*/
 
 /*	errors.c			*/
 
