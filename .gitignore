@@ -56,6 +56,3 @@ Mkfile.old
 dkms.conf
 
 # Osef
-Makefile
-my_main.c
-main.c

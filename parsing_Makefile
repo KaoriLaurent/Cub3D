@@ -1,0 +1,35 @@
+CC  	:= cc
+CCFLAGS	:= -Wall -Wextra -Werror -c
+
+NAME := cub3d
+
+_SRCS := errors.c freedom.c parsing_main.c parser_frame.c parser_routines.c reader.c parser_map.c parser_utils.c utils.c
+SRCS = $(addprefix srcs/, $(_SRCS))
+SRCO = $(SRCS:.c=.o)
+
+FLAG = -Wall -Wextra -Werror
+INC = -I includes/
+
+all : $(NAME)
+
+$(NAME) : $(SRCO)
+	make -C libft
+	clang -o $(NAME) $(SRCO) libft/libft.a -fsanitize=address
+
+%.o : %.c
+	clang $(FLAG) -o $(NAME) -c $< -o $@ $(INC)
+
+clean :
+	/bin/rm -f $(SRCO)
+	make clean -C libft
+
+fclean : clean
+	/bin/rm -f $(NAME)
+	/bin/rm -f libft/libft.a
+
+re : fclean all
+
+rcl : re
+	make clean
+
+.PHONY: make clean fclean re rcl sanitize
