@@ -6,22 +6,28 @@
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 00:31:55 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/09 04:39:16 by requinch         ###   ########.fr       */
+/*   Updated: 2022/07/30 00:23:09 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	free_map(char **map, int ret)
+int	free_text(char **text, int ret)
 {
 	unsigned int	x;
 
 	x = 0;
-	while (map[x])
+	while (text[x])
 	{
-		free(map[x]);
+		free(text[x]);
 		x += 1;
 	}
-	free(map);
+	free(text);
+	return (ret);
+}
+
+int	free_return(void *ptdr, int ret)
+{
+	free (ptdr);
 	return (ret);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
+/*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 00:54:45 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/28 00:37:49 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/07/31 03:52:19 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <math.h>
-# include <mlx.h>
+/*# include <mlx.h>*/
 
 /******************************************************************************/
 /*			Defines															  */
@@ -111,8 +111,8 @@ typedef struct	s_map
 {
 	char			*raw;
 	t_resolution	map_res;
-	char			**map;
-	t_size			tile_size;
+	int				**map;
+	t_position		start_pos;
 	char			*tex_path[4];
 	unsigned int	ground_clr;
 	unsigned int	ceiling_clr;
@@ -195,6 +195,7 @@ t_rays		*randomalgo(t_player *pp);
 
 /*	errors.c			*/
 
+void		*error_freeptrptr(t_errorcode code, void **ptr);
 void		*error_free(t_errorcode code, void *ptr);
 int			error_int_ret(t_errorcode code, int ret);
 int			error_int_free(t_errorcode code, int ret, void *ptr);
@@ -218,12 +219,24 @@ char		*read_file(char *filepath);
 
 t_boolean	parsing(char *cub_raw);
 
+/*	parser_map.c		*/
+
+unsigned short	check_the_map(char **map);
+
 /*	parser_routines.c	*/
 
 short	parse_texture(char *line, t_counter step);
 short	parse_color(char *line, t_counter step);
 short	parse_map(char *line, int fd);
 short	parse_rest(char *line, short gnl_ret);
+
+/*	parser_utils.c		*/
+
+t_boolean	is_edge(char **map, t_vector pos);
+t_vector	shift_north(t_vector pos);
+t_vector	shift_south(t_vector pos);
+t_vector	shift_west(t_vector pos);
+t_vector	shift_east(t_vector pos);
 
 /*	raycasting.c		*/
 
@@ -247,19 +260,17 @@ void	sprites();
 /*	utils.c				*/
 
 int		isInteger(float f);
+void	print_map_char(char **map);
+void	step_debug_map_parser(char **map, t_vector pos, t_counter step);
 
 /*	window.c			*/
 
 void	window_init(t_vars *vars);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
-/*	utils_parser.c		*/
-
-unsigned int	get_max_length(char **map);
-unsigned short	check_the_map(char **map);
-
 /*	freedom.c			*/
 
-int	free_map(char **map, int ret);
+int	free_text(char **text, int ret);
+int	free_return(void *ptdr, int ret);
 
 #endif

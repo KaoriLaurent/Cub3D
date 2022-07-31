@@ -6,11 +6,25 @@
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 01:57:18 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/09 15:58:11 by requinch         ###   ########.fr       */
+/*   Updated: 2022/07/30 00:39:20 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+void	*error_freeptrptr(t_errorcode code, void **ptr)
+{
+	unsigned int	x;
+
+	x = 0;
+	while (ptr[x])
+	{
+		free(ptr[x]);
+		x += 1;
+	}
+	free(ptr);
+	return(throw_error(code));
+}
 
 void	*error_free(t_errorcode code, void *ptr)
 {
