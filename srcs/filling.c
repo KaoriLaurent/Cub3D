@@ -6,7 +6,7 @@
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 05:20:05 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/01 03:04:07 by requinch         ###   ########.fr       */
+/*   Updated: 2022/08/01 04:45:17 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void	fill_mapmapmap(int **map, char *raw, t_player *player)
 			}
 		}
 	}
+	if (current.x > 0)
+		map[current.y][current.x] = -1;
 }
 
 /* 
