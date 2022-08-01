@@ -6,7 +6,7 @@
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 00:54:00 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/31 19:25:28 by requinch         ###   ########.fr       */
+/*   Updated: 2022/08/01 03:06:38 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ t_boolean	parsing(char *filepath)
 	while (step < 8 && !(last / 10))
 	{
 		last = parse_next_line(fd, step);
-		printf("Debug : parse_next_line returned %i for step %i\n", last, step);
 		if ((last % 10 == 2) || (last / 10 && step < 6) || last == 3)
 		{
 			close (fd);

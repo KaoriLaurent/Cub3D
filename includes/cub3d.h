@@ -6,7 +6,7 @@
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 00:54:45 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/31 19:30:20 by requinch         ###   ########.fr       */
+/*   Updated: 2022/08/01 02:24:30 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ typedef unsigned int	t_size;
 /*			Enums															  */
 /******************************************************************************/
 
-typedef enum	boolean
+typedef enum	e_boolean
 {
 	TRUE = 1,
 	FALSE = 0,
 }				t_boolean;
 
-typedef enum	errcode
+typedef enum	e_errcode
 {
 	ERR_UNDEFINED = 0,
 	ERR_MALLOC = 10,
@@ -85,11 +85,6 @@ typedef struct	s_resolution
 	t_size	width;
 	t_size	height;
 }				t_resolution;
-
-/***
-****	fov :			0 - 3599
-****	direction :		0 - 3599
-***/
 
 typedef struct	s_player
 {
@@ -185,17 +180,28 @@ static int worldMap[24][24]=
 /*			Function declarations											  */
 /******************************************************************************/
 
-/* algorithm.c			*/
+/*	algorithm.c			*/
 
 float		get_dir(float dir, int input);
 t_rays		*randomalgo(t_player *pp);
 
+/*	debug.c				*/
+
+void	print_world(t_world world);
+void	print_map_char(char **map);
+void	print_map_int(int **map);
+void	step_debug_map_filler(char *raw, int index);
+void	step_debug_map_parser(char **map, t_vector pos, t_counter step);
+
 /*	filling_utils.c 	*/
 
-char	*get_next_element(char	*raw);
+char	*get_next_element(char *raw, t_counter step);
+int		get_color(char *raw);
 char	*get_texpath(char *raw);
 
 /*	filling.c			*/
+
+void	fill_world(t_world *world);
 
 /*	errors.c			*/
 
@@ -265,8 +271,6 @@ void	sprites();
 /*	utils.c				*/
 
 int		isInteger(float f);
-void	print_map_char(char **map);
-void	step_debug_map_parser(char **map, t_vector pos, t_counter step);
 
 /*	window.c			*/
 
@@ -275,6 +279,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 /*	freedom.c			*/
 
+int	free_world(t_world	*world);
 int	free_text(char **text, int ret);
 int	free_return(void *ptdr, int ret);
 

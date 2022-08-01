@@ -6,7 +6,7 @@
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 16:43:08 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/31 20:03:30 by requinch         ###   ########.fr       */
+/*   Updated: 2022/08/01 03:14:04 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ t_boolean	recursive_check(char **map, t_vector pos, t_counter step)
 		return (FALSE);
 	if (map[pos.y][pos.x] == '1' || map[pos.y][pos.x] == '2')
 		return (TRUE);
-	if (step == 400) // TWEAK THIS ?
+	if (step == 400)
 		return (TRUE);
 	if (map[pos.y][pos.x] == '0' || map[pos.y][pos.x] == 'N'
 		|| map[pos.y][pos.x] == 'S' || map[pos.y][pos.x] == 'E'
@@ -104,17 +104,9 @@ unsigned short	check_the_map(char **map)
 	t_vector	pos;
 
 	if (check_general(map) == FALSE)
-	{
-		print_map_char(map);
 		return (free_text(map, 2));
-	}
 	pos = get_starting_pos(map);
-	printf("Debug : Starting at (%i, %i).\n", pos.x, pos.y);
 	if (recursive_check(map, pos, 0) == FALSE)
-	{
-		print_map_char(map);
 		return(free_text(map, 2));
-	}
-	print_map_char(map);
 	return (free_text(map, 1));
 }
