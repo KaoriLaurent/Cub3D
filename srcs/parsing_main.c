@@ -6,7 +6,7 @@
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 03:24:43 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/01 03:05:13 by requinch         ###   ########.fr       */
+/*   Updated: 2022/08/01 04:54:21 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 **
 **	MATHMECH CIRCULAR
 **
-**	That was all thanks for you attention
+**	That was all thanks for your attention
 */
 
 int	main(int ac, char **av)
