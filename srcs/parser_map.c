@@ -6,7 +6,7 @@
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 16:43:08 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/01 03:14:04 by requinch         ###   ########.fr       */
+/*   Updated: 2022/08/01 04:58:33 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_boolean	check_map_character(char c, int mode)
 	if (mode == 2 && c == '1')
 		return (TRUE);
 	else if (mode == 1 && (c == 32 || c == '0' || c == 'N' || c == 'S'
-		|| c == 'E' || c == 'W' || c == '1'))
+			|| c == 'E' || c == 'W' || c == '1'))
 		return (TRUE);
 	return (FALSE);
 }
@@ -107,6 +107,6 @@ unsigned short	check_the_map(char **map)
 		return (free_text(map, 2));
 	pos = get_starting_pos(map);
 	if (recursive_check(map, pos, 0) == FALSE)
-		return(free_text(map, 2));
+		return (free_text(map, 2));
 	return (free_text(map, 1));
 }

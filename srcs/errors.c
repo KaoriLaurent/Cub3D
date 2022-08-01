@@ -6,7 +6,7 @@
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 01:57:18 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/30 00:39:20 by requinch         ###   ########.fr       */
+/*   Updated: 2022/08/01 05:00:31 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ void	*error_freeptrptr(t_errorcode code, void **ptr)
 		x += 1;
 	}
 	free(ptr);
-	return(throw_error(code));
+	return (throw_error(code));
 }
 
 void	*error_free(t_errorcode code, void *ptr)
 {
 	free(ptr);
-	return(throw_error(code));
+	return (throw_error(code));
 }
 
 int	error_int_ret(t_errorcode code, int ret)

@@ -6,7 +6,7 @@
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 00:54:00 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/01 03:06:38 by requinch         ###   ########.fr       */
+/*   Updated: 2022/08/01 04:58:56 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ unsigned short	parse_next_line(int fd, t_counter step)
 	if (gnl_ret == 0)
 		return (10 + parse_retval);
 	else
-		return(parse_retval);
+		return (parse_retval);
 }
 
 /*
@@ -56,8 +56,8 @@ unsigned short	parse_next_line(int fd, t_counter step)
 t_boolean	parsing(char *filepath)
 {
 	t_counter	step;
-	short	last;
-	int	fd;
+	short		last;
+	int			fd;
 
 	step = 0;
 	fd = open(filepath, O_RDONLY);

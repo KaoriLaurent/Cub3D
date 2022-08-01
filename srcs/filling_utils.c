@@ -6,7 +6,7 @@
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 05:40:06 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/01 03:06:01 by requinch         ###   ########.fr       */
+/*   Updated: 2022/08/01 05:04:05 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*get_next_element(char *raw, t_counter step)
 	return (&raw[index]);
 }
 
-int		get_color(char *raw)
+int	get_color(char *raw)
 {
 	int	start;
 	int	r;
@@ -33,7 +33,7 @@ int		get_color(char *raw)
 	int	b;
 
 	start = 1;
-	while(raw[start] == 32)
+	while (raw[start] == 32)
 		start++;
 	r = ft_atoi(&raw[start]);
 	start += 2 + ((r / 10) > 0) + ((r / 100) > 0);
@@ -57,7 +57,7 @@ char	*get_texpath(char *raw)
 		index++;
 	texpath = malloc(sizeof(char) * (index + 1));
 	if (!texpath)
-		return(throw_error(ERR_MALLOC));
+		return (throw_error(ERR_MALLOC));
 	index = 0;
 	while (raw[start + index] != '\n')
 	{

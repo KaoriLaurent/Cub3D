@@ -5,3 +5,4 @@
 ❌	A	28/07	Fix probleme colisions
 ❌	A	28/07	Fluidifier le rendu
 ✅	A	28/07	Sucer des bites
+❌	R	01/08	Fix angles direction dans filling

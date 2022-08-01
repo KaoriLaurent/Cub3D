@@ -6,7 +6,7 @@
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 01:36:09 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/01 02:09:23 by requinch         ###   ########.fr       */
+/*   Updated: 2022/08/01 05:04:33 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_strfcat(char *first, char second)
 	index = 0;
 	cat = ft_calloc(size, sizeof(char));
 	if (!cat)
-		return(throw_error(ERR_MALLOC));
+		return (throw_error(ERR_MALLOC));
 	while (first && first[index])
 	{
 		cat[index] = first[index];
@@ -42,8 +42,8 @@ char	*ft_strfcat(char *first, char second)
 t_boolean	check_fileformat(char *filepath, char *expected)
 {
 	t_counter	index;
-	t_size	file_len;
-	t_size	ext_len;
+	t_size		file_len;
+	t_size		ext_len;
 
 	if (!expected || !(*expected))
 		return (TRUE);

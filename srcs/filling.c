@@ -6,7 +6,7 @@
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 05:20:05 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/01 04:45:17 by requinch         ###   ########.fr       */
+/*   Updated: 2022/08/01 05:02:24 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	fill_player(t_vector current, t_player *player, char *c)
 		c[0] = '0';
 		return ;
 	}
-	if (c[0] == 'N') //TWEAK THIS
+	if (c[0] == 'N')
 		player->dir = 0.0;
 	else if (c[0] == 'S')
 		player->dir = 180.0;
@@ -55,7 +55,7 @@ void	fill_mapmapmap(int **map, char *raw, t_player *player)
 				break ;
 			if (current.x != 0)
 			{
-				map[current.y][current.x] = -1; 
+				map[current.y][current.x] = -1;
 				current.y += 1;
 				current.x = -1;
 			}
@@ -86,7 +86,7 @@ int	**fill_mapmap(int **map, char *raw, t_player *player)
 			break ;
 		temp[current.x] = ft_calloc(current.y + 1, sizeof(int));
 		if (!temp[current.x])
-			return (throw_error(ERR_MALLOC)); //Free temps on error but cba
+			return (throw_error(ERR_MALLOC));
 		current.x += 1;
 		if (!raw[index + current.y])
 			break ;
@@ -94,7 +94,7 @@ int	**fill_mapmap(int **map, char *raw, t_player *player)
 	}
 	map = malloc(current.x * sizeof(int *));
 	if (!map)
-		return (throw_error(ERR_MALLOC)); //Free temps on error but cba
+		return (throw_error(ERR_MALLOC));
 	map[current.x] = NULL;
 	while (--current.x > -1)
 		map[current.x] = temp[current.x];
@@ -136,6 +136,5 @@ void	fill_world(t_world *world)
 
 	raw_save = world->map.raw;
 	fill_map(&world->map, &world->player, 0);
-	/* Include a safety for any null pointer due to ERR_MALLOC */
 	world->map.raw = raw_save;
 }
