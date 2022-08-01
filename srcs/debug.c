@@ -6,7 +6,7 @@
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 01:14:37 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/01 03:09:08 by requinch         ###   ########.fr       */
+/*   Updated: 2022/08/01 03:37:56 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	print_world(t_world world)
 	printf("Debug : south texpath : %s\n", world.map.tex_path[1]);
 	printf("Debug : west texpath : %s\n", world.map.tex_path[2]);
 	printf("Debug : east texpath : %s\n", world.map.tex_path[3]);
-	printf("Debug : ground color : %ui \n", world.map.ground_clr);
-	printf("Debug : ceiling color : %ui \n", world.map.ceiling_clr);
+	printf("Debug : ground color : %u \n", world.map.ground_clr);
+	printf("Debug : ceiling color : %u \n", world.map.ceiling_clr);
 }
 
 void	print_map_char(char **map)
