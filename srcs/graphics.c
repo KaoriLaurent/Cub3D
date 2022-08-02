@@ -6,11 +6,71 @@
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 15:19:59 by anbourge          #+#    #+#             */
-/*   Updated: 2022/07/20 16:59:30 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/02 18:42:49 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+void	tex_init(t_vars *vars, char **paths)
+{
+	int	i;
+
+	i = -1;
+	while (++i < 4)
+	{
+		vars->tex[i].img = mlx_xpm_file_to_image(vars->mlx, paths[i], &vars->tex[i].width, &vars->tex[i].height);
+		vars->tex[i].ptr = mlx_get_data_addr(vars->tex[i].img, &vars->tex[i].bpp, &vars->tex[i].size_line, &vars->tex[i].endian);
+	}
+	i = -1;
+	while (paths[++i])
+		free(paths[i]);
+}
+
+t_tex	*get_tex(t_vars *vars, t_rays *r)
+{
+	//if (r->side == 0)
+	//{
+		if ((int)vars->p->pos.y > r->wall_y)
+			return (&vars->tex[1]);
+		else if ((int)vars->p->pos.y <= r->wall_y)
+		{
+			//printf("player y %f & wall y %i\n", vars->p->pos.y, r->wall_y);
+			return (&vars->tex[0]);
+		}
+	//}
+	/*else
+	{
+		if (vars->p->pos.x >= r->wall_x)
+			return (&vars->tex[3]);
+		else if (vars->p->pos.x < r->wall_x)
+			return (&vars->tex[2]);	
+	}*/
+	//printf("cacalol\n");
+	return (&vars->tex[0]);
+}
+
+int	get_texture_color(int y, t_vars *vars, int start, float lh, t_rays *r)
+{
+	int			color;
+	float		step;
+	float		texPos;
+	int 		texY;
+	int			texX;
+	t_tex		*tex;
+	
+	tex = get_tex(vars, r);
+	step = 1.0 * tex->height / (lh * 1.4);
+	texPos = (start - 720.0 / 2.0 + lh / 2.0) * step;
+	texPos += step * (y - start);
+	texY = (int)texPos & (tex->height - 1);
+	if (r->side == 1)
+		texX = (r->y - r->wall_y) * tex->height;
+	else
+		texX = (r->x - r->wall_x) * tex->height;
+	color = *(int *)(tex->ptr + (4 * texY * tex->height) + (texX * 4));
+	return (color);
+}
 
 void	graphics(t_rays *r, t_vars *vars)
 {
@@ -46,12 +106,12 @@ void	graphics(t_rays *r, t_vars *vars)
 				while (k < start)
 					my_mlx_pixel_put(&vars->img, l, ++k, 0x0000B5E2);
 				k--;
-				while (k <= end)
+				while (k++ <= end)
 				{
 					if (r->wall_x == 23 || r->wall_y == 23 || r->wall_x == 0 || r->wall_y == 0)
-						my_mlx_pixel_put(&vars->img, l, ++k, color[0]);
+						my_mlx_pixel_put(&vars->img, l, k, color[0]);
 					else
-						my_mlx_pixel_put(&vars->img, l, ++k, color[1]);
+						my_mlx_pixel_put(&vars->img, l, k, get_texture_color(k, vars, start, lh, r));
 				}
 				k--;
 				while (k <= 720)
@@ -67,12 +127,12 @@ void	graphics(t_rays *r, t_vars *vars)
 				while (k < start)
 					my_mlx_pixel_put(&vars->img, l, ++k, 0x0000B5E2);
 				k--;
-				while (k <= end)
+				while (k++ <= end)
 				{
 					if (r->wall_x == 23 || r->wall_y == 23 || r->wall_x == 0 || r->wall_y == 0)
-						my_mlx_pixel_put(&vars->img, l, ++k, color[0]);
+						my_mlx_pixel_put(&vars->img, l, k, color[0]);
 					else
-						my_mlx_pixel_put(&vars->img, l, ++k, color[1]);
+						my_mlx_pixel_put(&vars->img, l, k, get_texture_color(k, vars, start, lh, r));
 				}
 				k--;
 				while (k <= 720)

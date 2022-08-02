@@ -3,18 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 17:14:06 by anbourge          #+#    #+#             */
-/*   Updated: 2022/08/01 05:04:54 by requinch         ###   ########.fr       */
+/*   Updated: 2022/08/02 22:08:05 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	isInteger(float f)
+int	isinteger(float f)
 {
-	int i = (int)f;
+	int	i;
+
+	i = (int)f;
 	if (f == i)
 		return (1);
 	return (0);

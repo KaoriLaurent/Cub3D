@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/07 00:54:45 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/01 18:01:24 by requinch         ###   ########.fr       */
+/*   Created: 2022/08/03 00:23:08 by requinch          #+#    #+#             */
+/*   Updated: 2022/08/03 00:23:10 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,10 +125,23 @@ typedef struct	s_data {
 	int		endian;
 }				t_data;
 
+typedef struct	s_tex
+{
+	void	*ptr;
+	void	*img;
+	int		bpp;
+	int		size_line;
+	int		endian;
+	int		width;
+	int		height;
+}				t_tex;
+
 typedef struct s_vars {
-	void	*mlx;
-	void	*win;
-	t_data	img;
+	void		*mlx;
+	void		*win;
+	t_player	*p;
+	t_data		img;
+	t_tex		tex[4];
 }				t_vars;
 
 typedef struct	s_rays
@@ -136,8 +149,8 @@ typedef struct	s_rays
 	float	x;
 	float	y;
 	float	dist;
-	short	wall_x;
-	short	wall_y;
+	int		wall_x;
+	int		wall_y;
 	int		side;
 	void	*next;
 } 				t_rays;
@@ -213,6 +226,8 @@ void		*throw_error(t_errorcode code);
 
 /*	graphics.c			*/
 
+void		tex_init(t_vars *vars, char **paths);
+int			get_texture_color(int y, t_vars *vars, int start, float lh, t_rays *r);
 void		graphics(t_rays *r, t_vars *vars);
 
 /*	movements.c			*/
