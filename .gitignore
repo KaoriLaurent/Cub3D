@@ -1,6 +1,5 @@
 cub3d
 Makefile
-my_main.c
 
 # Prerequisites
 *.d
