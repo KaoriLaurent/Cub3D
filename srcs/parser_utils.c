@@ -1,28 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/07 03:24:43 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/09 18:04:17 by requinch         ###   ########.fr       */
+/*   Created: 2022/07/31 00:39:27 by requinch          #+#    #+#             */
+/*   Updated: 2022/08/01 04:57:26 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	main(int ac, char **av)
+t_boolean	is_edge(char **map, t_vector pos)
 {
-	t_world	world;
+	if (pos.x == 0 || pos.y == 0
+		|| !map[pos.y][pos.x + 1] || !map[pos.y + 1])
+		return (TRUE);
+	return (FALSE);
+}
 
-	if (ac != 2)
-		return (error_int_ret(ERR_ARG, 0)); //temp, do we need more than filepath as arg ?
-	world.map.raw = read_file(av[1]);
-	if (!world.map.raw || !parsing(av[1]))
-		return (0);
-	printf("OK");
-	//fill in &map
-	//do stuff
-	return (1);
+t_vector	shift_north(t_vector pos)
+{
+	pos.y -= 1;
+	return (pos);
+}
+
+t_vector	shift_south(t_vector pos)
+{
+	pos.y += 1;
+	return (pos);
+}
+
+t_vector	shift_west(t_vector pos)
+{
+	pos.x -= 1;
+	return (pos);
+}
+
+t_vector	shift_east(t_vector pos)
+{
+	pos.x += 1;
+	return (pos);
 }

@@ -6,22 +6,47 @@
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 00:31:55 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/02 18:42:58 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/02 22:08:11 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	free_map(char **map, int ret)
+int	free_world(t_world	*world)
+{
+	t_vector	current;
+
+	current.y = 0;
+	free(world->map.raw);
+	free(world->map.tex_path[0]);
+	free(world->map.tex_path[1]);
+	free(world->map.tex_path[2]);
+	free(world->map.tex_path[3]);
+	while (world->map.map[current.y])
+	{
+		free(world->map.map[current.y]);
+		current.y++;
+	}
+	free(world->map.map);
+	return (0);
+}
+
+int	free_text(char **text, int ret)
 {
 	unsigned int	x;
 
 	x = 0;
-	while (map[x])
+	while (text[x])
 	{
-		free(map[x]);
+		free(text[x]);
 		x += 1;
 	}
-	free(map);
+	free(text);
+	return (ret);
+}
+
+int	free_return(void *ptdr, int ret)
+{
+	free (ptdr);
 	return (ret);
 }

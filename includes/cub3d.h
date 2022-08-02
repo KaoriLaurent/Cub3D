@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
+/*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 00:54:45 by requinch          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/08/02 18:32:19 by anbourge         ###   ########.fr       */
+=======
+/*   Updated: 2022/08/01 02:24:30 by requinch         ###   ########.fr       */
+>>>>>>> e8ce43c18388ab3b6b18656d8115c6cb5088f530
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +27,7 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <math.h>
-# include <mlx.h>
+/*# include <mlx.h>*/
 
 /******************************************************************************/
 /*			Defines															  */
@@ -45,13 +49,13 @@ typedef unsigned int	t_size;
 /*			Enums															  */
 /******************************************************************************/
 
-typedef enum	boolean
+typedef enum	e_boolean
 {
 	TRUE = 1,
 	FALSE = 0,
 }				t_boolean;
 
-typedef enum	errcode
+typedef enum	e_errcode
 {
 	ERR_UNDEFINED = 0,
 	ERR_MALLOC = 10,
@@ -86,11 +90,6 @@ typedef struct	s_resolution
 	t_size	height;
 }				t_resolution;
 
-/***
-****	fov :			0 - 3599
-****	direction :		0 - 3599
-***/
-
 typedef struct	s_player
 {
 	t_position	pos;
@@ -99,20 +98,17 @@ typedef struct	s_player
 }				t_player;
 
 /***
-****	resolution :	[0] : width
-****					[1] : height
 ****	tex_path :		[0] : N
 ****					[1] : S
-****					[2] : E
-****					[3] : W
+****					[2] : W
+****					[3] : E
 ***/
 
 typedef struct	s_map
 {
 	char			*raw;
-	t_resolution	map_res;
-	char			**map;
-	t_size			tile_size;
+	int				**map;
+	t_position		start_pos;
 	char			*tex_path[4];
 	unsigned int	ground_clr;
 	unsigned int	ceiling_clr;
@@ -201,13 +197,32 @@ static int worldMap[24][24]=
 /*			Function declarations											  */
 /******************************************************************************/
 
-/* algorithm.c			*/
+/*	algorithm.c			*/
 
 float		get_dir(float dir, int input);
 t_rays		*randomalgo(t_player *pp);
 
+/*	debug.c				*/
+
+void	print_world(t_world world);
+void	print_map_char(char **map);
+void	print_map_int(int **map);
+void	step_debug_map_filler(char *raw, int index);
+void	step_debug_map_parser(char **map, t_vector pos, t_counter step);
+
+/*	filling_utils.c 	*/
+
+char	*get_next_element(char *raw, t_counter step);
+int		get_color(char *raw);
+char	*get_texpath(char *raw);
+
+/*	filling.c			*/
+
+void	fill_world(t_world *world);
+
 /*	errors.c			*/
 
+void		*error_freeptrptr(t_errorcode code, void **ptr);
 void		*error_free(t_errorcode code, void *ptr);
 int			error_int_ret(t_errorcode code, int ret);
 int			error_int_free(t_errorcode code, int ret, void *ptr);
@@ -233,12 +248,25 @@ char		*read_file(char *filepath);
 
 t_boolean	parsing(char *cub_raw);
 
+/*	parser_map.c		*/
+
+unsigned short	check_the_map(char **map);
+
 /*	parser_routines.c	*/
 
 short	parse_texture(char *line, t_counter step);
 short	parse_color(char *line, t_counter step);
+short	parse_upper(char *line);
 short	parse_map(char *line, int fd);
 short	parse_rest(char *line, short gnl_ret);
+
+/*	parser_utils.c		*/
+
+t_boolean	is_edge(char **map, t_vector pos);
+t_vector	shift_north(t_vector pos);
+t_vector	shift_south(t_vector pos);
+t_vector	shift_west(t_vector pos);
+t_vector	shift_east(t_vector pos);
 
 /*	raycasting.c		*/
 
@@ -268,13 +296,10 @@ int		isInteger(float f);
 void	window_init(t_vars *vars);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
-/*	utils_parser.c		*/
-
-unsigned int	get_max_length(char **map);
-unsigned short	check_the_map(char **map);
-
 /*	freedom.c			*/
 
-int	free_map(char **map, int ret);
+int	free_world(t_world	*world);
+int	free_text(char **text, int ret);
+int	free_return(void *ptdr, int ret);
 
 #endif
