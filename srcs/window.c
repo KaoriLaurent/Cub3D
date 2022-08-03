@@ -6,7 +6,7 @@
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 17:27:01 by anbourge          #+#    #+#             */
-/*   Updated: 2022/08/02 18:37:54 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/04 00:42:00 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	window_init(t_vars *vars)
 	vars->img.img = mlx_new_image(vars->mlx, 1920, 1080);
 	vars->img.addr = mlx_get_data_addr(vars->img.img, &vars->img.bits_per_pixel, &vars->img.line_length,
 			&vars->img.endian);
-	paths[0] = ft_strdup("./sprites/greystone.xpm");
+	paths[0] = ft_strdup("./sprites/wood.xpm");
 	paths[1] = ft_strdup("./sprites/redbrick.xpm");
-	paths[2] = ft_strdup("./sprites/wood.xpm");
+	paths[2] = ft_strdup("./sprites/greystone.xpm");
 	paths[3] = ft_strdup("./sprites/mossy.xpm");
 	tex_init(vars, paths);
 }

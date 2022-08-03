@@ -6,7 +6,7 @@
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 15:08:23 by anbourge          #+#    #+#             */
-/*   Updated: 2022/08/02 18:18:31 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/04 00:44:38 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,5 @@ int	main()
 	mlx_loop_hook(vars->mlx, render_next_frame, a);
 	mlx_hook(vars->win, 2, 0, my_key_hook, a);
 	mlx_loop(vars->mlx);
+	exit(0);
 }

@@ -6,7 +6,7 @@
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 15:44:34 by anbourge          #+#    #+#             */
-/*   Updated: 2022/08/02 17:25:10 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/04 00:31:15 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_rays	*add_ray(t_rays *r, t_position pos, t_position player_pos, int *wall)
 			+ powf(pos.y - player_pos.y, 2.0));
 	new->wall_x = wall[1];
 	new->wall_y = wall[0];
-	r->side = wall[2];
+	new->side = wall[2];
 	new->next = NULL;
 	tmp->next = new;
 	return (r);

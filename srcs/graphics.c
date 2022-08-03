@@ -6,7 +6,7 @@
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 15:19:59 by anbourge          #+#    #+#             */
-/*   Updated: 2022/08/02 18:42:49 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/04 00:43:00 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,25 +29,22 @@ void	tex_init(t_vars *vars, char **paths)
 
 t_tex	*get_tex(t_vars *vars, t_rays *r)
 {
-	//if (r->side == 0)
-	//{
+	return (&vars->tex[r->side]);
+	/*if (r->side == 0 || r->side == 2)
+	{
 		if ((int)vars->p->pos.y > r->wall_y)
 			return (&vars->tex[1]);
 		else if ((int)vars->p->pos.y <= r->wall_y)
-		{
-			//printf("player y %f & wall y %i\n", vars->p->pos.y, r->wall_y);
 			return (&vars->tex[0]);
-		}
-	//}
-	/*else
+	}
+	else
 	{
 		if (vars->p->pos.x >= r->wall_x)
 			return (&vars->tex[3]);
 		else if (vars->p->pos.x < r->wall_x)
 			return (&vars->tex[2]);	
-	}*/
-	//printf("cacalol\n");
-	return (&vars->tex[0]);
+	}
+	return (&vars->tex[0]);*/
 }
 
 int	get_texture_color(int y, t_vars *vars, int start, float lh, t_rays *r)
@@ -64,7 +61,7 @@ int	get_texture_color(int y, t_vars *vars, int start, float lh, t_rays *r)
 	texPos = (start - 720.0 / 2.0 + lh / 2.0) * step;
 	texPos += step * (y - start);
 	texY = (int)texPos & (tex->height - 1);
-	if (r->side == 1)
+	if (r->side == 0 || r->side == 2)
 		texX = (r->y - r->wall_y) * tex->height;
 	else
 		texX = (r->x - r->wall_x) * tex->height;
@@ -107,12 +104,7 @@ void	graphics(t_rays *r, t_vars *vars)
 					my_mlx_pixel_put(&vars->img, l, ++k, 0x0000B5E2);
 				k--;
 				while (k++ <= end)
-				{
-					if (r->wall_x == 23 || r->wall_y == 23 || r->wall_x == 0 || r->wall_y == 0)
-						my_mlx_pixel_put(&vars->img, l, k, color[0]);
-					else
-						my_mlx_pixel_put(&vars->img, l, k, get_texture_color(k, vars, start, lh, r));
-				}
+					my_mlx_pixel_put(&vars->img, l, k, get_texture_color(k, vars, start, lh, r));
 				k--;
 				while (k <= 720)
 					my_mlx_pixel_put(&vars->img, l, ++k, 0x00009A17);
@@ -128,12 +120,7 @@ void	graphics(t_rays *r, t_vars *vars)
 					my_mlx_pixel_put(&vars->img, l, ++k, 0x0000B5E2);
 				k--;
 				while (k++ <= end)
-				{
-					if (r->wall_x == 23 || r->wall_y == 23 || r->wall_x == 0 || r->wall_y == 0)
-						my_mlx_pixel_put(&vars->img, l, k, color[0]);
-					else
-						my_mlx_pixel_put(&vars->img, l, k, get_texture_color(k, vars, start, lh, r));
-				}
+					my_mlx_pixel_put(&vars->img, l, k, get_texture_color(k, vars, start, lh, r));
 				k--;
 				while (k <= 720)
 					my_mlx_pixel_put(&vars->img, l, ++k, 0x00009A17);
