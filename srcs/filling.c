@@ -6,7 +6,7 @@
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 05:20:05 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/01 17:58:26 by requinch         ###   ########.fr       */
+/*   Updated: 2022/08/04 01:34:49 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ void	fill_player(t_vector current, t_player *player, char *c)
 		return ;
 	}
 	if (c[0] == 'N')
-		player->dir = 0.0;
-	else if (c[0] == 'S')
-		player->dir = 180.0;
-	else if (c[0] == 'W')
-		player->dir = 270.0;
-	else if (c[0] == 'E')
 		player->dir = 90.0;
+	else if (c[0] == 'S')
+		player->dir = 270.0;
+	else if (c[0] == 'W')
+		player->dir = 180.0;
+	else if (c[0] == 'E')
+		player->dir = 0.0;
 	c[0] = '0';
 	player->pos.x = (float)current.x;
 	player->pos.y = (float)current.y;
