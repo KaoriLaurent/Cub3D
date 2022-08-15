@@ -6,7 +6,7 @@
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:48:58 by anbourge          #+#    #+#             */
-/*   Updated: 2022/08/15 17:31:11 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/15 17:52:34 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,25 +75,24 @@ int	get_wall_side(t_position pos, int wall_x, int wall_y)
 	return (get_wall_side2(diff, tmp, ret));
 }
 
+void	algorithm2()
+{
+	
+}
+
 t_rays	*algorithm(t_all *a)
 {
-	int			ray[3];
+	int			ray[2];
 	t_position	p;
 	t_rays		*rays;
-	float		angle;
-	float		tmp;
+	float		angle[2];
 	float		r[2];
 	float		ratio;
 
 	rays = NULL;
-	ray[2] = 0;
-	angle = a->world->player.dir - (a->world->player.fov / 2.0f);
-	if (angle < 0.0f)
-		angle = 360.0f + angle;
-	tmp = (a->world->player.dir + (a->world->player.fov / 2.0f)) + 1.0f;
-	if (tmp > 360.0f)
-		tmp = tmp - 360.0f;
-	while ((int)angle != (int)tmp)
+	angle[0] = set_angle(a);
+	angle[1] = set_angle2(a);
+	while ((int)angle[0] != (int)angle[1])
 	{
 		ray[0] = a->world->player.pos.y;
 		ray[1] = a->world->player.pos.x;
@@ -102,10 +101,10 @@ t_rays	*algorithm(t_all *a)
 		ratio = 0.1;
 		while (ratio >= 0.000001)
 		{
-			p = next_intersection(angle, a->world->player, r[0]);
+			p = next_intersection(angle[0], a->world->player, r[0]);
 			ray[0] = p.y;
 			ray[1] = p.x;
-			if (worldMap[ray[0]][ray[1]] == 1 && ratio >= 0.000001)
+			if (a->world->map.map[ray[0]][ray[1]] == 1 && ratio >= 0.000001)
 			{
 				ratio /= 10;
 				r[0] = r[1];
@@ -113,14 +112,8 @@ t_rays	*algorithm(t_all *a)
 			r[1] = r[0];
 			r[0] += ratio;
 		}
-		ray[2] = get_wall_side(p, ray[1], ray[0]);
-		if (!rays)
-			rays = first_ray(p, a->world->player.pos, ray);
-		else
-			rays = add_ray(rays, p, a->world->player.pos, ray);
-		angle += 0.10f;
-		if (angle > 360.0f)
-		angle = angle - 360.0f;
+		rays = get_ray(rays, p, a, ray);
+		angle[0] = incr_angle(angle[0]);
 	}
 	return (rays);
 }

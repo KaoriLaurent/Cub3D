@@ -6,7 +6,7 @@
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 17:11:01 by anbourge          #+#    #+#             */
-/*   Updated: 2022/08/15 17:25:28 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/15 18:27:05 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@ int	my_key_hook(int keycode, t_all *all)
 		my_exit_hook(all);
 	else
 		player_movements(keycode, &all->world->player);
+	return (0);
+}
+
+int	render_next_frame(t_all *a)
+{
+	a->r = algorithm(a);
+	graphics(a);
+	mlx_put_image_to_window(a->vars->mlx, a->vars->win, a->vars->img.img, 0, 0);
 	return (0);
 }
 
@@ -62,12 +70,4 @@ void	player_movements(int keycode, t_player *player)
 		player->pos.x += (cos(get_dir(player->dir, 3)) * 0.5);
 	}
 	player_camera_movements(keycode, player);
-}
-
-int	render_next_frame(t_all *a)
-{
-	a->r = algorithm(a);
-	graphics(a);
-	mlx_put_image_to_window(a->vars->mlx, a->vars->win, a->vars->img.img, 0, 0);
-	return (0);
 }

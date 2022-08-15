@@ -6,7 +6,7 @@
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 15:44:34 by anbourge          #+#    #+#             */
-/*   Updated: 2022/08/04 00:31:15 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/15 17:51:15 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,15 @@ t_position	next_intersection(float angle, t_player p, float r)
 	pos.x = p.pos.x + (cos(degtorad(angle)) * r);
 	pos.y = p.pos.y - (sin(degtorad(angle)) * r);
 	return (pos);
+}
+
+t_rays	*get_ray(t_rays *rays, t_position p, t_all *a, int *ray)
+{
+	if (!rays)
+		rays = first_ray(p, a->world->player.pos, ray);
+	else
+		rays = add_ray(rays, p, a->world->player.pos, ray);
+	return (rays);
 }
 
 t_rays	*first_ray(t_position pos, t_position player_pos, int *wall)
@@ -34,7 +43,7 @@ t_rays	*first_ray(t_position pos, t_position player_pos, int *wall)
 			+ powf(pos.y - player_pos.y, 2.0));
 	r->wall_x = wall[1];
 	r->wall_y = wall[0];
-	r->side = wall[2];
+	r->side = get_wall_side(pos, wall[1], wall[0]);
 	r->next = NULL;
 	return (r);
 }
@@ -56,7 +65,7 @@ t_rays	*add_ray(t_rays *r, t_position pos, t_position player_pos, int *wall)
 			+ powf(pos.y - player_pos.y, 2.0));
 	new->wall_x = wall[1];
 	new->wall_y = wall[0];
-	new->side = wall[2];
+	new->side = get_wall_side(pos, wall[1], wall[0]);
 	new->next = NULL;
 	tmp->next = new;
 	return (r);
