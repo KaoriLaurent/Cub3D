@@ -6,7 +6,7 @@
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 00:31:55 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/02 22:08:11 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/15 16:05:10 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ int	free_world(t_world	*world)
 	free(world->map.tex_path[1]);
 	free(world->map.tex_path[2]);
 	free(world->map.tex_path[3]);
-	while (world->map.map[current.y])
+	/*while (world->map.map[current.y])
 	{
 		free(world->map.map[current.y]);
 		current.y++;
-	}
+	}*/
 	free(world->map.map);
 	return (0);
 }

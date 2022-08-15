@@ -3,22 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 03:24:43 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/08 23:35:37 by requinch         ###   ########.fr       */
+/*   Updated: 2022/08/15 16:24:43 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-/*
-**	IMPORTANT ANNOUNCEMENT
-**
-**	MATHMECH CIRCULAR
-**
-**	That was all thanks for your attention
-*/
 
 int	main(int ac, char **av)
 {
@@ -35,11 +27,11 @@ int	main(int ac, char **av)
 	if (!world.map.raw)
 		return (free_return(world.map.raw, 1));
 	fill_world(&world);
-	window_init(a->vars);
-	a->vars->p = &world.player;
-	a->player = &world.player;
+	a->world = &world;
+	window_init(a);
 	mlx_loop_hook(a->vars->mlx, render_next_frame, a);
 	mlx_hook(a->vars->win, 2, 0, my_key_hook, a);
+	mlx_hook(a->vars->win, 17, 0, my_exit_hook, a);
 	mlx_loop(a->vars->mlx);
 	free(a->vars);
 	free(a);

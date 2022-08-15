@@ -6,7 +6,7 @@
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 00:54:45 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/04 00:45:38 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/15 17:28:52 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,6 @@ typedef struct	s_tex
 typedef struct s_vars {
 	void		*mlx;
 	void		*win;
-	t_player	*p;
 	t_data		img;
 	t_tex		tex[4];
 }				t_vars;
@@ -158,7 +157,8 @@ typedef struct	s_rays
 typedef struct	s_all
 {
 	t_vars		*vars;
-	t_player	*player;
+	t_world		*world;
+	t_rays		*r;
 }				t_all;
 
 static int worldMap[24][24]=
@@ -196,7 +196,9 @@ static int worldMap[24][24]=
 /*	algorithm.c			*/
 
 float		get_dir(float dir, int input);
-t_rays		*randomalgo(t_player *pp);
+int			get_wall_side2(float *diff, float *tmp, int *ret);
+int			get_wall_side(t_position pos, int wall_x, int wall_y);
+t_rays		*algorithm(t_all *a);
 
 /*	debug.c				*/
 
@@ -227,14 +229,17 @@ void		*throw_error(t_errorcode code);
 /*	graphics.c			*/
 
 void		tex_init(t_vars *vars, char **paths);
-int			get_texture_color(int y, t_vars *vars, int start, float lh, t_rays *r);
-void		graphics(t_rays *r, t_vars *vars);
+int			get_texture_color(int *s, t_vars *vars, float lh, t_rays *r);
+int			graphics2(t_all *a, int *i, int *limit, float lh);
+int			graphics3(t_all *a, int *i, int *limit, float lh);
+void		graphics(t_all *a);
 
 /*	movements.c			*/
 
 int			my_key_hook(int keycode, t_all *all);
-void		player_movements(int keycode , t_all *a);
-int			render_next_frame(void *YourStruct);
+void		player_camera_movements(int keycode, t_player *player);
+void		player_movements(int keycode , t_player *player);
+int			render_next_frame(t_all *a);
 
 /*	reader.c			*/
 
@@ -289,7 +294,8 @@ int		isInteger(float f);
 
 /*	window.c			*/
 
-void	window_init(t_vars *vars);
+void	window_init(t_all *a);
+int		my_exit_hook(t_all *all);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 /*	freedom.c			*/

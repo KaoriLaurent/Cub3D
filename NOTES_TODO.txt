@@ -1,8 +1,7 @@
 ✅	R	07/07	Ajouter libft la plus à jour
 ❌	R	08/07	Tester le parsing avec des maps valides & invalides
 ✅	R	08/07	Rework le parsing : ordre alternatif
-❌	A	28/07	Ajouter textures
-❌	A	28/07	Fix probleme colisions
-❌	A	28/07	Fluidifier le rendu
-✅	A	28/07	Sucer des bites
+✅	A	28/07	Ajouter textures
+❔	A	28/07	Fix probleme colisions
+✅	A	28/07	Fluidifier le rendu
 ❌	R	01/08	Fix angles direction dans filling

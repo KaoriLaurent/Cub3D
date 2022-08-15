@@ -6,7 +6,7 @@
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 15:19:59 by anbourge          #+#    #+#             */
-/*   Updated: 2022/08/04 00:43:00 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/15 17:12:57 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,115 +19,112 @@ void	tex_init(t_vars *vars, char **paths)
 	i = -1;
 	while (++i < 4)
 	{
-		vars->tex[i].img = mlx_xpm_file_to_image(vars->mlx, paths[i], &vars->tex[i].width, &vars->tex[i].height);
-		vars->tex[i].ptr = mlx_get_data_addr(vars->tex[i].img, &vars->tex[i].bpp, &vars->tex[i].size_line, &vars->tex[i].endian);
+		vars->tex[i].img = mlx_xpm_file_to_image(vars->mlx, paths[i],
+				&vars->tex[i].width, &vars->tex[i].height);
+		vars->tex[i].ptr = mlx_get_data_addr(vars->tex[i].img,
+				&vars->tex[i].bpp, &vars->tex[i].size_line,
+				&vars->tex[i].endian);
 	}
-	i = -1;
-	while (paths[++i])
-		free(paths[i]);
 }
 
-t_tex	*get_tex(t_vars *vars, t_rays *r)
-{
-	return (&vars->tex[r->side]);
-	/*if (r->side == 0 || r->side == 2)
-	{
-		if ((int)vars->p->pos.y > r->wall_y)
-			return (&vars->tex[1]);
-		else if ((int)vars->p->pos.y <= r->wall_y)
-			return (&vars->tex[0]);
-	}
-	else
-	{
-		if (vars->p->pos.x >= r->wall_x)
-			return (&vars->tex[3]);
-		else if (vars->p->pos.x < r->wall_x)
-			return (&vars->tex[2]);	
-	}
-	return (&vars->tex[0]);*/
-}
-
-int	get_texture_color(int y, t_vars *vars, int start, float lh, t_rays *r)
+int	get_texture_color(int *s, t_vars *vars, float lh, t_rays *r)
 {
 	int			color;
 	float		step;
-	float		texPos;
-	int 		texY;
-	int			texX;
-	t_tex		*tex;
-	
-	tex = get_tex(vars, r);
-	step = 1.0 * tex->height / (lh * 1.4);
-	texPos = (start - 720.0 / 2.0 + lh / 2.0) * step;
-	texPos += step * (y - start);
-	texY = (int)texPos & (tex->height - 1);
+	float		texpos;
+	int			tex[2];
+	t_tex		*t;
+
+	t = &vars->tex[r->side];
+	step = 1.0 * t->height / (lh * 1.4);
+	texpos = (s[0] - 720.0 / 2.0 + lh / 2.0) * step;
+	texpos += step * (s[1] - s[0]);
+	tex[1] = (int)texpos & (t->height - 1);
 	if (r->side == 0 || r->side == 2)
-		texX = (r->y - r->wall_y) * tex->height;
+		tex[0] = (r->y - r->wall_y) * t->height;
 	else
-		texX = (r->x - r->wall_x) * tex->height;
-	color = *(int *)(tex->ptr + (4 * texY * tex->height) + (texX * 4));
+		tex[0] = (r->x - r->wall_x) * t->height;
+	color = *(int *)(t->ptr + (4 * tex[1] * t->height) + (tex[0] * 4));
 	return (color);
 }
 
-void	graphics(t_rays *r, t_vars *vars)
+int	graphics2(t_all *a, int *i, int *limit, float lh)
 {
-	int	i;
-	int	j;
-	int	k;
-	int	l;
-	float	lh;
-	int	start;
-	int	end;
-	int	color[2];
-	
-	i = 1;
-	l = 1280;
-	color[0] = 0x00FF0000;
-	color[1] = 0x000700A3;
-	while (r)
+	int	s[2];
+
+	s[0] = limit[0];
+	while (++i[1] < 2)
 	{
-		lh = (2.0 * 720.0) / r->dist;
-		start = (-lh / 2) + (720 / 2);
-		if (start < 0)
-			start = 0;
-		end = (lh / 2) + (720 / 2);
-		if (end >= 720)
-			end = 719;
-		j = -1;
-		//printf("Distance ray (%f,%f) = %f\n", r->x, r->y, r->dist);
-		if (i % 6 == 0)
+		i[2] = -1;
+		while (i[2] < limit[0])
+			my_mlx_pixel_put(&a->vars->img, i[3], ++i[2],
+				a->world->map.ceiling_clr);
+		i[2]--;
+		while (i[2]++ <= limit[1])
 		{
-			while (++j < 2)
-			{
-				k = -1;
-				while (k < start)
-					my_mlx_pixel_put(&vars->img, l, ++k, 0x0000B5E2);
-				k--;
-				while (k++ <= end)
-					my_mlx_pixel_put(&vars->img, l, k, get_texture_color(k, vars, start, lh, r));
-				k--;
-				while (k <= 720)
-					my_mlx_pixel_put(&vars->img, l, ++k, 0x00009A17);
-				l--;
-			}
+			s[1] = i[2];
+			my_mlx_pixel_put(&a->vars->img, i[3], i[2],
+				get_texture_color(s, a->vars, lh, a->r));
 		}
+		i[2]--;
+		while (i[2] <= 720)
+			my_mlx_pixel_put(&a->vars->img, i[3], ++i[2],
+				a->world->map.ground_clr);
+		i[3]--;
+	}
+	return (i[3]);
+}
+
+int	graphics3(t_all *a, int *i, int *limit, float lh)
+{
+	int	s[2];
+
+	s[0] = limit[0];
+	while (++i[1] < 3)
+	{
+		i[2] = -1;
+		while (i[2] < limit[0])
+			my_mlx_pixel_put(&a->vars->img, i[3], ++i[2],
+				a->world->map.ceiling_clr);
+		i[2]--;
+		while (i[2]++ <= limit[1])
+		{
+			s[1] = i[2];
+			my_mlx_pixel_put(&a->vars->img, i[3], i[2],
+				get_texture_color(s, a->vars, lh, a->r));
+		}
+		i[2]--;
+		while (i[2] <= 720)
+			my_mlx_pixel_put(&a->vars->img, i[3], ++i[2],
+				a->world->map.ground_clr);
+		i[3]--;
+	}
+	return (i[3]);
+}
+
+void	graphics(t_all *a)
+{
+	int		i[4];
+	float	lh;
+	int		limit[2];
+
+	i[0] = 1;
+	i[3] = 1280;
+	while (a->r)
+	{
+		lh = (2.0 * 720.0) / a->r->dist;
+		limit[0] = (-lh / 2) + (720 / 2);
+		if (limit[0] < 0)
+			limit[0] = 0;
+		limit[1] = (lh / 2) + (720 / 2);
+		if (limit[1] >= 720)
+			limit[1] = 719;
+		i[1] = -1;
+		if (i[0] % 6 == 0)
+			i[3] = graphics2(a, i, limit, lh);
 		else
-		{
-			while (++j < 3)
-			{
-				k = -1;
-				while (k < start)
-					my_mlx_pixel_put(&vars->img, l, ++k, 0x0000B5E2);
-				k--;
-				while (k++ <= end)
-					my_mlx_pixel_put(&vars->img, l, k, get_texture_color(k, vars, start, lh, r));
-				k--;
-				while (k <= 720)
-					my_mlx_pixel_put(&vars->img, l, ++k, 0x00009A17);
-				l--;
-			}
-		}
-		i++;
-		r = r->next;
+			i[3] = graphics3(a, i, limit, lh);
+		i[0]++;
+		a->r = a->r->next;
 	}
 }

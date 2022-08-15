@@ -6,7 +6,7 @@
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 18:08:06 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/20 16:41:04 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/15 17:18:25 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 float	degtorad(float deg)
 {
 	float	f;
-	
+
 	f = deg * (PI / 180.0);
 	return (f);
 }
