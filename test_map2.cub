@@ -1,0 +1,15 @@
+
+WE ./sprites/greystone.xpm
+
+C 13,82,244
+SO ./sprites/wood.xpm
+
+NO ./sprites/redbrick.xpm
+EA ./sprites/purplestone.xpm
+F 7,164,0
+
+111111
+100101
+101001
+1100N1
+111111

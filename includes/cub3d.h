@@ -6,7 +6,7 @@
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 00:54:45 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/15 18:27:30 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/17 01:17:17 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,7 @@ typedef struct	s_all
 float		get_dir(float dir, int input);
 int			get_wall_side2(float *diff, float *tmp, int *ret);
 int			get_wall_side(t_position pos, int wall_x, int wall_y);
-t_rays		*algorithm(t_all *a);
+t_rays		*algorithm(t_all *a, t_rays	*rays);
 
 /*	debug.c				*/
 
@@ -210,6 +210,7 @@ void		graphics(t_all *a);
 
 int			my_key_hook(int keycode, t_all *all);
 int			render_next_frame(t_all *a);
+int			check_player_movement(int keycode, t_world *world);
 void		player_camera_movements(int keycode, t_player *player);
 void		player_movements(int keycode, t_player *player);
 
@@ -263,9 +264,8 @@ void	sprites();
 
 /*	utils.c				*/
 
-void	set_map_size(t_world *world);
-float	set_angle(t_all *a);
-float	set_angle2(t_all *a);
+void	set_angles(t_all *a, float *f);
+void	set_ratios(float *f);
 float	incr_angle(float angle);
 
 /*	window.c			*/

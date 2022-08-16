@@ -6,7 +6,7 @@
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:48:58 by anbourge          #+#    #+#             */
-/*   Updated: 2022/08/15 17:52:34 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/17 01:17:11 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,45 +75,39 @@ int	get_wall_side(t_position pos, int wall_x, int wall_y)
 	return (get_wall_side2(diff, tmp, ret));
 }
 
-void	algorithm2()
-{
-	
-}
+/*
+**	f[0] = angle
+**	f[1] = angle max
+**	f[2] = actual ratio
+**	f[3] = last ratio
+**	f[4] = ratio multiplicator
+*/
 
-t_rays	*algorithm(t_all *a)
+t_rays	*algorithm(t_all *a, t_rays	*rays)
 {
 	int			ray[2];
 	t_position	p;
-	t_rays		*rays;
-	float		angle[2];
-	float		r[2];
-	float		ratio;
+	float		f[5];
 
-	rays = NULL;
-	angle[0] = set_angle(a);
-	angle[1] = set_angle2(a);
-	while ((int)angle[0] != (int)angle[1])
+	set_angles(a, f);
+	while ((int)f[0] != (int)f[1])
 	{
-		ray[0] = a->world->player.pos.y;
-		ray[1] = a->world->player.pos.x;
-		r[0] = 0.0;
-		r[1] = 0.0;
-		ratio = 0.1;
-		while (ratio >= 0.000001)
+		set_ratios(f);
+		while (f[4] >= 0.000001)
 		{
-			p = next_intersection(angle[0], a->world->player, r[0]);
+			p = next_intersection(f[0], a->world->player, f[2]);
 			ray[0] = p.y;
 			ray[1] = p.x;
-			if (a->world->map.map[ray[0]][ray[1]] == 1 && ratio >= 0.000001)
+			if (a->world->map.map[ray[0]][ray[1]] == 1 && f[4] >= 0.000001)
 			{
-				ratio /= 10;
-				r[0] = r[1];
+				f[4] /= 10;
+				f[2] = f[3];
 			}
-			r[1] = r[0];
-			r[0] += ratio;
+			f[3] = f[2];
+			f[2] += f[4];
 		}
 		rays = get_ray(rays, p, a, ray);
-		angle[0] = incr_angle(angle[0]);
+		f[0] = incr_angle(f[0]);
 	}
 	return (rays);
 }

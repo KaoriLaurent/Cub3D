@@ -6,30 +6,27 @@
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 17:14:06 by anbourge          #+#    #+#             */
-/*   Updated: 2022/08/15 18:25:03 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/17 01:17:08 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-float	set_angle(t_all *a)
+void	set_angles(t_all *a, float *f)
 {
-	float	angle;
-
-	angle = a->world->player.dir - (a->world->player.fov / 2.0f);
-	if (angle < 0.0f)
-		angle = 360.0f + angle;
-	return (angle);
+	f[0] = a->world->player.dir - (a->world->player.fov / 2.0f);
+	if (f[0] < 0.0f)
+		f[0] = 360.0f + f[0];
+	f[1] = (a->world->player.dir + (a->world->player.fov / 2.0f)) + 1.0f;
+	if (f[1] > 360.0f)
+		f[1] = f[1] - 360.0f;
 }
 
-float	set_angle2(t_all *a)
+void	set_ratios(float *f)
 {
-	float	angle;
-
-	angle = (a->world->player.dir + (a->world->player.fov / 2.0f)) + 1.0f;
-	if (angle > 360.0f)
-		angle = angle - 360.0f;
-	return (angle);
+	f[2] = 0.0;
+	f[3] = 0.0;
+	f[4] = 0.01;
 }
 
 float	incr_angle(float angle)
