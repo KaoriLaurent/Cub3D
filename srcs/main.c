@@ -6,7 +6,7 @@
 /*   By: anbourge <anbourge@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 03:24:43 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/21 16:51:09 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/21 17:35:27 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	main(int ac, char **av)
 	fill_world(&world);
 	a->world = &world;
 	window_init(a);
-	mlx_loop_hook(a->vars->mlx, render_next_frame, a);
-	mlx_hook(a->vars->win, 2, 0, my_key_hook, a);
 	mlx_hook(a->vars->win, 17, 0, my_exit_hook, a);
+	mlx_hook(a->vars->win, 2, 0, my_key_hook, a);
+	mlx_loop_hook(a->vars->mlx, render_next_frame, a);
 	mlx_loop(a->vars->mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: anbourge <anbourge@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 17:11:01 by anbourge          #+#    #+#             */
-/*   Updated: 2022/08/21 16:46:53 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/21 17:24:23 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	my_key_hook(int keycode, t_all *all)
 {
+	printf("keycode = %i\n", keycode);
 	if (keycode == 53)
 		my_exit_hook(all);
 	else if (check_player_movement(keycode, all->world))
