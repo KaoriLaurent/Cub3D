@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   filling.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
+/*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 05:20:05 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/15 18:23:50 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/21 15:55:18 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,10 @@ void	fill_player(t_vector current, t_player *player, char *c)
 	player->fov = 60.0;
 }
 
-void	fill_mapmapmap(int **map, char *raw, t_player *player)
+void	fill_mapmapmap(int **map, char *raw, t_player *player, int index)
 {
 	t_vector	current;
-	int			index;
 
-	index = -1;
 	current.x = -1;
 	current.y = 0;
 	while (raw[++index])
@@ -53,12 +51,7 @@ void	fill_mapmapmap(int **map, char *raw, t_player *player)
 		{
 			if (raw[index - 1] == '\n')
 				break ;
-			if (current.x != 0)
-			{
-				map[current.y][current.x] = -1;
-				current.y += 1;
-				current.x = -1;
-			}
+			current = osef(current, map[current.y][current.x]);
 		}
 	}
 	if (current.x > 0)
@@ -69,14 +62,12 @@ void	fill_mapmapmap(int **map, char *raw, t_player *player)
 **	x and y logically inverted here, doesn't matter.
 */
 
-int	**fill_mapmap(int **map, char *raw, t_player *player)
+int	**fill_mapmap(int **map, char *raw, t_player *player, int index)
 {
 	t_vector	current;
-	int			index;
 	int			*temp[1000];
 
 	current.x = 0;
-	index = 0;
 	while (raw[index])
 	{
 		current.y = 0;
@@ -85,20 +76,16 @@ int	**fill_mapmap(int **map, char *raw, t_player *player)
 		if (current.y == 0)
 			break ;
 		temp[current.x] = ft_calloc(current.y + 1, sizeof(int));
-		if (!temp[current.x])
-			return (throw_error(ERR_MALLOC));
 		current.x += 1;
 		if (!raw[index + current.y])
 			break ;
 		index += current.y + 1;
 	}
 	map = malloc(current.x * sizeof(int *));
-	if (!map)
-		return (throw_error(ERR_MALLOC));
 	map[current.x] = NULL;
 	while (--current.x > -1)
 		map[current.x] = temp[current.x];
-	fill_mapmapmap(map, raw, player);
+	fill_mapmapmap(map, raw, player, -1);
 	return (map);
 }
 
@@ -109,7 +96,7 @@ void	fill_map(t_map *map, t_player *player, t_counter step)
 		return ;
 	else if (step == 6)
 	{
-		map->map = fill_mapmap(map->map, map->raw, player);
+		map->map = fill_mapmap(map->map, map->raw, player, 0);
 		map->start_pos = player->pos;
 	}
 	else if (map->raw[0] == 'N')
