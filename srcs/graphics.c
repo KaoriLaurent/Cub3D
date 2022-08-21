@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anbourge <anbourge@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 15:19:59 by anbourge          #+#    #+#             */
-/*   Updated: 2022/08/15 17:12:57 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/21 12:32:21 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	graphics2(t_all *a, int *i, int *limit, float lh)
 	s[0] = limit[0];
 	while (++i[1] < 2)
 	{
-		i[2] = -1;
+		i[2] = 0;
 		while (i[2] < limit[0])
 			my_mlx_pixel_put(&a->vars->img, i[3], ++i[2],
 				a->world->map.ceiling_clr);
@@ -82,7 +82,7 @@ int	graphics3(t_all *a, int *i, int *limit, float lh)
 	s[0] = limit[0];
 	while (++i[1] < 3)
 	{
-		i[2] = -1;
+		i[2] = 0;
 		while (i[2] < limit[0])
 			my_mlx_pixel_put(&a->vars->img, i[3], ++i[2],
 				a->world->map.ceiling_clr);

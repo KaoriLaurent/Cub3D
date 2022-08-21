@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anbourge <anbourge@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 00:54:45 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/17 01:17:17 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/21 16:44:01 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,15 @@ typedef struct	s_all
 float		get_dir(float dir, int input);
 int			get_wall_side2(float *diff, float *tmp, int *ret);
 int			get_wall_side(t_position pos, int wall_x, int wall_y);
-t_rays		*algorithm(t_all *a, t_rays	*rays);
+void		algorithm(t_all *a, int i);
+
+/*	angles_basic.c		*/
+
+float	degtorad(float deg);
+short	angle_add(short one, short two);
+short	angle_sub(short one, short two);
+short	angle_mul(short one, short factor);
+short	angle_div(short one, short factor);
 
 /*	debug.c				*/
 
@@ -180,6 +188,14 @@ void	print_map_int(int **map);
 void	step_debug_map_filler(char *raw, int index);
 void	step_debug_map_parser(char **map, t_vector pos, t_counter step);
 
+/*	errors.c			*/
+
+void	*error_freeptrptr(t_errorcode code, void **ptr);
+void	*error_free(t_errorcode code, void *ptr);
+int		error_int_ret(t_errorcode code, int ret);
+int		error_int_free(t_errorcode code, int ret, void *ptr);
+void	*throw_error(t_errorcode code);
+
 /*	filling_utils.c 	*/
 
 char	*get_next_element(char *raw, t_counter step);
@@ -188,15 +204,13 @@ char	*get_texpath(char *raw);
 
 /*	filling.c			*/
 
-void	fill_world(t_world *world);
+void		fill_world(t_world *world);
 
-/*	errors.c			*/
+/*	freedom.c			*/
 
-void		*error_freeptrptr(t_errorcode code, void **ptr);
-void		*error_free(t_errorcode code, void *ptr);
-int			error_int_ret(t_errorcode code, int ret);
-int			error_int_free(t_errorcode code, int ret, void *ptr);
-void		*throw_error(t_errorcode code);
+int	free_world(t_world	*world);
+int	free_text(char **text, int ret);
+int	free_return(void *ptdr, int ret);
 
 /*	graphics.c			*/
 
@@ -214,13 +228,9 @@ int			check_player_movement(int keycode, t_world *world);
 void		player_camera_movements(int keycode, t_player *player);
 void		player_movements(int keycode, t_player *player);
 
-/*	reader.c			*/
-
-char		*read_file(char *filepath);
-
 /*	parser_frame.c		*/
 
-t_boolean	parsing(char *cub_raw);
+t_boolean		parsing(char *cub_raw);
 
 /*	parser_map.c		*/
 
@@ -245,22 +255,15 @@ t_vector	shift_east(t_vector pos);
 /*	raycasting.c		*/
 
 t_position	next_intersection(float angle, t_player p, float r);
-t_rays		*get_ray(t_rays *rays, t_position p, t_all *a, int *ray);
-t_rays		*first_ray(t_position pos, t_position player_pos, int *wall);
-t_rays		*add_ray(t_rays *r, t_position pos, t_position player_pos, int *wall);
+void		get_ray(int i, t_position p, t_all *a, int *ray);
+void		first_ray(t_all *all, t_position pos, t_position player_pos, int *wall);
+void		add_ray(t_all *all, t_position pos, t_position player_pos, int *wall);
 float		set_r(float angle, t_position pos, int i, int a);
 
-/*	angles_basic.c		*/
+/*	reader.c			*/
 
-float	degtorad(float deg);
-short	angle_add(short one, short two);
-short	angle_sub(short one, short two);
-short	angle_mul(short one, short factor);
-short	angle_div(short one, short factor);
+char		*read_file(char *filepath);
 
-/*	sprites				*/
-
-void	sprites();
 
 /*	utils.c				*/
 
@@ -273,11 +276,5 @@ float	incr_angle(float angle);
 void	window_init(t_all *a);
 int		my_exit_hook(t_all *all);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-
-/*	freedom.c			*/
-
-int	free_world(t_world	*world);
-int	free_text(char **text, int ret);
-int	free_return(void *ptdr, int ret);
 
 #endif

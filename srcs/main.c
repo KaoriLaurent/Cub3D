@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anbourge <anbourge@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 03:24:43 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/15 18:27:39 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/21 16:51:09 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,4 @@ int	main(int ac, char **av)
 	mlx_hook(a->vars->win, 2, 0, my_key_hook, a);
 	mlx_hook(a->vars->win, 17, 0, my_exit_hook, a);
 	mlx_loop(a->vars->mlx);
-	free(a->vars);
-	free(a);
-	return (free_world(&world));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anbourge <anbourge@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 15:44:34 by anbourge          #+#    #+#             */
-/*   Updated: 2022/08/15 17:51:15 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/21 16:49:13 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,44 +21,37 @@ t_position	next_intersection(float angle, t_player p, float r)
 	return (pos);
 }
 
-t_rays	*get_ray(t_rays *rays, t_position p, t_all *a, int *ray)
+void	get_ray(int	i, t_position p, t_all *a, int *ray)
 {
-	if (!rays)
-		rays = first_ray(p, a->world->player.pos, ray);
+	if (i > 0)
+		add_ray(a, p, a->world->player.pos, ray);
 	else
-		rays = add_ray(rays, p, a->world->player.pos, ray);
-	return (rays);
+		first_ray(a, p, a->world->player.pos, ray);
 }
 
-t_rays	*first_ray(t_position pos, t_position player_pos, int *wall)
+void	first_ray(t_all *all, t_position pos, t_position player_pos, int *wall)
 {
-	t_rays	*r;
-
-	r = malloc(sizeof(t_rays));
-	if (!r)
-		return (throw_error(10));
-	r->x = pos.x;
-	r->y = pos.y;
-	r->dist = sqrtf(powf(pos.x - player_pos.x, 2.0)
+	all->r->x = pos.x;
+	all->r->y = pos.y;
+	all->r->dist = sqrtf(powf(pos.x - player_pos.x, 2.0)
 			+ powf(pos.y - player_pos.y, 2.0));
-	r->wall_x = wall[1];
-	r->wall_y = wall[0];
-	r->side = get_wall_side(pos, wall[1], wall[0]);
-	r->next = NULL;
-	return (r);
+	all->r->wall_x = wall[1];
+	all->r->wall_y = wall[0];
+	all->r->side = get_wall_side(pos, wall[1], wall[0]);
+	all->r->next = NULL;
 }
 
-t_rays	*add_ray(t_rays *r, t_position pos, t_position player_pos, int *wall)
+void	add_ray(t_all *all, t_position pos, t_position player_pos, int *wall)
 {
 	t_rays	*new;
 	t_rays	*tmp;
 
-	tmp = r;
+	tmp = all->r;
 	while (tmp->next)
 		tmp = tmp->next;
 	new = malloc(sizeof(t_rays));
 	if (!new)
-		return (throw_error(10));
+		return ;
 	new->x = pos.x;
 	new->y = pos.y;
 	new->dist = sqrtf(powf(pos.x - player_pos.x, 2.0)
@@ -68,7 +61,6 @@ t_rays	*add_ray(t_rays *r, t_position pos, t_position player_pos, int *wall)
 	new->side = get_wall_side(pos, wall[1], wall[0]);
 	new->next = NULL;
 	tmp->next = new;
-	return (r);
 }
 
 float	set_r(float angle, t_position pos, int i, int a)

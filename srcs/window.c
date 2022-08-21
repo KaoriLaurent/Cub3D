@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anbourge <anbourge@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 17:27:01 by anbourge          #+#    #+#             */
-/*   Updated: 2022/08/15 17:16:11 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/21 13:17:12 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,25 @@ void	window_init(t_all *a)
 
 int	my_exit_hook(t_all *all)
 {
+	int		i;
+	t_rays	*tmp;
+
 	if (all->vars->img.img)
 		mlx_destroy_image(all->vars->mlx, all->vars->img.img);
 	if (all->vars->mlx && all->vars->win)
 		mlx_destroy_window(all->vars->mlx, all->vars->win);
+	i = -1;
+	while (++i < 4)
+		mlx_destroy_image(all->vars->mlx, all->vars->tex[i].img);
 	free(all->vars);
-	free(all);
 	free_world(all->world);
+	while (all->r)
+	{
+		tmp = all->r;
+		all->r = all->r->next;
+		free(tmp);
+	}
+	free(all);
 	exit(0);
 }
 
