@@ -6,7 +6,7 @@
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 00:54:45 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/21 17:51:30 by requinch         ###   ########.fr       */
+/*   Updated: 2022/08/21 17:55:15 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,18 +167,18 @@ typedef struct s_all
 
 /*	algorithm.c			*/
 
-float		get_dir(float dir, int input);
-int			get_wall_side2(float *diff, float *tmp, int *ret);
-int			get_wall_side(t_position pos, int wall_x, int wall_y);
-void		algorithm(t_all *a, int i);
+float			get_dir(float dir, int input);
+int				get_wall_side2(float *diff, float *tmp, int *ret);
+int				get_wall_side(t_position pos, int wall_x, int wall_y);
+void			algorithm(t_all *a, int i);
 
 /*	angles_basic.c		*/
 
-float	degtorad(float deg);
-short	angle_add(short one, short two);
-short	angle_sub(short one, short two);
-short	angle_mul(short one, short factor);
-short	angle_div(short one, short factor);
+float			degtorad(float deg);
+short			angle_add(short one, short two);
+short			angle_sub(short one, short two);
+short			angle_mul(short one, short factor);
+short			angle_div(short one, short factor);
 
 /*	debug.c				*/
 
@@ -201,7 +201,7 @@ void			*throw_error(t_errorcode code);
 char			*get_next_element(char *raw, t_counter step);
 int				get_color(char *raw);
 char			*get_texpath(char *raw);
-t_vector		osef(t_vector current, int steak);
+t_vector		osef(t_vector current, int *steak);
 
 /*	filling.c			*/
 
@@ -259,15 +259,15 @@ t_vector		shift_east(t_vector pos);
 
 /*	raycasting.c		*/
 
-t_position	next_intersection(float angle, t_player p, float r);
-void		get_ray(int i, t_position p, t_all *a, int *ray);
-void		first_ray(t_all *all, t_position pos, t_position player_pos, int *wall);
-void		add_ray(t_all *all, t_position pos, t_position player_pos, int *wall);
-float		set_r(float angle, t_position pos, int i, int a);
+t_position		next_intersection(float angle, t_player p, float r);
+void			get_ray(int i, t_position p, t_all *a, int *ray);
+void			first_ray(t_all *all, t_position pos, t_position player_pos, int *wall);
+void			add_ray(t_all *all, t_position pos, t_position player_pos, int *wall);
+float			set_r(float angle, t_position pos, int i, int a);
 
 /*	reader.c			*/
 
-char		*read_file(char *filepath);
+char			*read_file(char *filepath);
 
 /*	utils.c				*/
 

@@ -6,7 +6,7 @@
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 05:40:06 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/21 15:55:00 by requinch         ###   ########.fr       */
+/*   Updated: 2022/08/21 17:54:32 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,11 @@ char	*get_texpath(char *raw)
 	return (texpath);
 }
 
-t_vector	osef(t_vector current, int steak)
+t_vector	osef(t_vector current, int *steak)
 {
 	if (current.x != 0)
 	{
-		steak = -1;
+		*steak = -1;
 		current.y += 1;
 		current.x = -1;
 	}

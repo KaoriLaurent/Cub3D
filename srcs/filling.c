@@ -6,7 +6,7 @@
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 05:20:05 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/21 15:55:18 by requinch         ###   ########.fr       */
+/*   Updated: 2022/08/21 17:54:22 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	fill_mapmapmap(int **map, char *raw, t_player *player, int index)
 		{
 			if (raw[index - 1] == '\n')
 				break ;
-			current = osef(current, map[current.y][current.x]);
+			current = osef(current, &map[current.y][current.x]);
 		}
 	}
 	if (current.x > 0)
