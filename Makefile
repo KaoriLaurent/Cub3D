@@ -17,7 +17,7 @@ all : $(NAME)
 
 mlx : $(SRCO_BASIC) $(SRCO_GFX)
 	make -C libft
-	cc -o $(NAME) $(SRCO_BASIC) $(SRCO_GFX) -Lmlx -lmlx -framework OpenGL -framework AppKit libft/libft.a
+	cc -o $(NAME) $(SRCO_BASIC) $(SRCO_GFX) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz libft/libft.a
 
 no_gfx : $(SRCO_BASIC)
 	make -C libft
@@ -28,7 +28,7 @@ no_gfx_sanitize : $(SRCO_BASIC)
 	cc -o $(NAME) $(SRCO_BASIC) libft/libft.a -fsanitize=address
 
 %.o : %.c
-	cc $(FLAG) -Imlx -o $(NAME) -c $< -o $@ $(INC)
+	cc $(FLAG) -I/usr/include -Imlx_linux -O3 -o $(NAME) -c $< -o $@ $(INC)
 
 clean :
 	/bin/rm -f $(SRCO_GFX) $(SRCO_BASIC)

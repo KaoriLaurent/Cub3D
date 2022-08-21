@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_frame.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anbourge <anbourge@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 00:54:00 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/01 04:58:56 by requinch         ###   ########.fr       */
+/*   Updated: 2022/08/21 11:34:09 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ unsigned short	parse_next_line(int fd, t_counter step)
 	short	gnl_ret;
 	short	parse_retval;
 
+	parse_retval = 0;
 	gnl_ret = get_next_line(fd, &line);
 	if (gnl_ret == -1)
 	{

@@ -6,7 +6,7 @@
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 01:14:37 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/21 15:47:28 by requinch         ###   ########.fr       */
+/*   Updated: 2022/08/21 17:51:40 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	step_debug_map_filler(char *raw, int index)
 	char	tmp;
 
 	getchar();
-	system("clear");
+	//system("clear");
 	printf("Debug : checking index %i\n", index);
 	tmp = raw[index];
 	raw[index] = 'X';
@@ -83,7 +83,7 @@ void	step_debug_map_parser(char **map, t_vector pos, t_counter step)
 	char	tmp;
 
 	getchar();
-	system("clear");
+	//system("clear");
 	printf("Debug : checking pos (%i, %i). Step %i.\n", pos.x, pos.y, step);
 	if (pos.x < 0 || pos.y < 0)
 	{

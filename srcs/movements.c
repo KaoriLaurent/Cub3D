@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movements.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anbourge <anbourge@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 17:11:01 by anbourge          #+#    #+#             */
-/*   Updated: 2022/08/17 01:17:49 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/21 17:24:23 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	my_key_hook(int keycode, t_all *all)
 {
+	printf("keycode = %i\n", keycode);
 	if (keycode == 53)
 		my_exit_hook(all);
 	else if (check_player_movement(keycode, all->world))
@@ -23,11 +24,19 @@ int	my_key_hook(int keycode, t_all *all)
 
 int	render_next_frame(t_all *a)
 {
-	t_rays	*rays;
+	t_rays	*tmp;
 
-	rays = NULL;
-	a->r = algorithm(a, rays);
+	a->r = malloc(sizeof(t_rays));
+	if (!a->r)
+		return (0);
+	algorithm(a, -1);
 	graphics(a);
+	while (a->r)
+	{
+		tmp = a->r;
+		a->r = a->r->next;
+		free(tmp);
+	}
 	mlx_put_image_to_window(a->vars->mlx, a->vars->win, a->vars->img.img, 0, 0);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algorithm.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anbourge <anbourge@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:48:58 by anbourge          #+#    #+#             */
-/*   Updated: 2022/08/17 01:17:11 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/21 16:43:21 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	get_wall_side(t_position pos, int wall_x, int wall_y)
 **	f[4] = ratio multiplicator
 */
 
-t_rays	*algorithm(t_all *a, t_rays	*rays)
+void	algorithm(t_all *a, int i)
 {
 	int			ray[2];
 	t_position	p;
@@ -106,8 +106,7 @@ t_rays	*algorithm(t_all *a, t_rays	*rays)
 			f[3] = f[2];
 			f[2] += f[4];
 		}
-		rays = get_ray(rays, p, a, ray);
+		get_ray(++i, p, a, ray);
 		f[0] = incr_angle(f[0]);
 	}
-	return (rays);
 }
