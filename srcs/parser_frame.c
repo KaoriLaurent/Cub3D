@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_frame.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anbourge <anbourge@42.student.fr>          +#+  +:+       +#+        */
+/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 00:54:00 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/21 11:34:09 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/23 00:19:58 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ t_boolean	parsing(char *filepath)
 	int			fd;
 
 	step = 0;
+	if (!check_fileformat(filepath, EXPECTED_FILEFORMAT))
+		return (error_int_ret(ERR_FILEFORMAT, FALSE));
 	fd = open(filepath, O_RDONLY);
 	last = 1;
 	if (fd < 0)

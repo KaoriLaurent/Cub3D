@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_routines.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 17:50:14 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/01 04:58:03 by requinch         ###   ########.fr       */
+/*   Updated: 2022/08/22 23:54:12 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ short	parse_texture(char *line, t_counter step)
 	{
 		while (line[index] == ' ')
 			index++;
+		if (!check_fileformat(&line[index], ".xpm"))
+			return (error_int_ret(ERR_FILEFORMAT, 2));
 		fd = open(&line[index], O_RDONLY);
 		if (fd < 0)
 			return (2);
@@ -36,25 +38,25 @@ short	parse_texture(char *line, t_counter step)
 
 short	parse_color(char *line, t_counter step)
 {
-	t_counter	index;
-	t_counter	c_nbr;
+	t_counter	index[2];
 
-	index = 1;
-	c_nbr = 1;
+	index[0] = 1;
+	index[1] = 1;
 	if (line && !line[0])
 		return (0);
 	if (line[0] && ((step == 4 && line[0] == 'F')
 			|| (step == 5 && line[0] == 'C')))
 	{
-		while (line[index] == ' ')
-			index++;
-		while (c_nbr < 4)
+		while (line[index[0]] == ' ')
+			index[0]++;
+		if (!is_num_or_comma(&line[index[0]], 0, 1))
+			return (2);
+		while (index[1] < 4)
 		{
-			if (ft_atoi(&line[index]) < 0 || ft_atoi(&line[index]) > 255)
+			if (ft_atoi(&line[index[0]]) < 0 || ft_atoi(&line[index[0]]) > 255)
 				return (2);
-			index += 2 + ((ft_atoi(&line[index]) / 10) > 0)
-				+ ((ft_atoi(&line[index]) / 100) > 0);
-			c_nbr += 1;
+			index[0] += numlen(ft_atoi(&line[index[0]]));
+			index[1] += 1;
 		}
 		return (1);
 	}
@@ -104,7 +106,7 @@ short	parse_map(char *line, int fd)
 		free(line);
 		gnl_ret = get_next_line(fd, &line);
 		if (gnl_ret == -1)
-			return (error_int_free(ERR_GNL, 3, line));
+			return (error_int_ret(ERR_GNL, 3));
 		total.height += 1;
 	}
 	free(line);

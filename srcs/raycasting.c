@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anbourge <anbourge@42.student.fr>          +#+  +:+       +#+        */
+/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 15:44:34 by anbourge          #+#    #+#             */
-/*   Updated: 2022/08/21 16:49:13 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/22 20:34:32 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_position	next_intersection(float angle, t_player p, float r)
 	return (pos);
 }
 
-void	get_ray(int	i, t_position p, t_all *a, int *ray)
+void	get_ray(int i, t_position p, t_all *a, int *ray)
 {
 	if (i > 0)
 		add_ray(a, p, a->world->player.pos, ray);

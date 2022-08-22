@@ -6,7 +6,7 @@
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 17:27:01 by anbourge          #+#    #+#             */
-/*   Updated: 2022/08/22 19:15:11 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/22 21:23:08 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,15 @@ int	my_exit_hook(t_all *all)
 	int		i;
 	t_rays	*tmp;
 
+	i = -1;
+	while (++i < 4)
+		mlx_destroy_image(all->vars->mlx, all->vars->tex[i].img);
 	if (all->vars->img.img)
 		mlx_destroy_image(all->vars->mlx, all->vars->img.img);
 	if (all->vars->mlx && all->vars->win)
 		mlx_destroy_window(all->vars->mlx, all->vars->win);
-	i = -1;
-	while (++i < 4)
-		mlx_destroy_image(all->vars->mlx, all->vars->tex[i].img);
+	mlx_destroy_display(all->vars->mlx);
+	free(all->vars->mlx);
 	free(all->vars);
 	free_world(all->world);
 	while (all->r)

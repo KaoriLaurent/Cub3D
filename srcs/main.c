@@ -6,7 +6,7 @@
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 03:24:43 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/22 18:36:58 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/22 21:11:38 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ int	main(int ac, char **av)
 	t_world	world;
 	t_all	*a;
 
-	a = malloc(sizeof(t_all));
-	a->vars = malloc(sizeof(t_vars));
 	if (ac != 2)
 		return (error_int_ret(ERR_ARG, 0));
 	if (!parsing(av[1]))
@@ -27,10 +25,16 @@ int	main(int ac, char **av)
 	if (!world.map.raw)
 		return (free_return(world.map.raw, 1));
 	fill_world(&world);
+	a = malloc(sizeof(t_all));
+	if (!a)
+		return (0);
+	a->vars = malloc(sizeof(t_vars));
+	if (!a->vars)
+		return (0);
 	a->world = &world;
 	window_init(a);
 	mlx_hook(a->vars->win, 17, 0, my_exit_hook, a);
-	mlx_hook(a->vars->win, 2, (1L<<0), my_key_hook, a);
+	mlx_hook(a->vars->win, 2, (1L << 0), my_key_hook, a);
 	mlx_loop_hook(a->vars->mlx, render_next_frame, a);
 	mlx_loop(a->vars->mlx);
 }

@@ -3,41 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   reader.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 01:36:09 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/01 05:04:33 by requinch         ###   ########.fr       */
+/*   Updated: 2022/08/22 22:34:34 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-/*
-**	Requires :
-**	first to be allocated, second not to be.
-*/
-
-char	*ft_strfcat(char *first, char second)
-{
-	char		*cat;
-	t_size		size;
-	t_counter	index;
-
-	size = ft_strlen(first) + 2;
-	index = 0;
-	cat = ft_calloc(size, sizeof(char));
-	if (!cat)
-		return (throw_error(ERR_MALLOC));
-	while (first && first[index])
-	{
-		cat[index] = first[index];
-		index += 1;
-	}
-	cat[index] = second;
-	cat[index + 1] = 0;
-	free(first);
-	return (cat);
-}
 
 t_boolean	check_fileformat(char *filepath, char *expected)
 {
@@ -70,8 +43,6 @@ char	*read_file(char *filepath)
 
 	if (!filepath || !(*filepath))
 		return (throw_error(ERR_FILEPATH));
-	if (!check_fileformat(filepath, EXPECTED_FILEFORMAT))
-		return (throw_error(ERR_FILEFORMAT));
 	filecontent = ft_calloc(1, sizeof(char));
 	if (!filecontent)
 		return (throw_error(ERR_MALLOC));

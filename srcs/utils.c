@@ -6,11 +6,38 @@
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 17:14:06 by anbourge          #+#    #+#             */
-/*   Updated: 2022/08/22 18:13:23 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/22 23:56:14 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+int	numlen(int i)
+{
+	int	numlen;
+
+	numlen = 2;
+	numlen += ((i / 10) > 0);
+	numlen += + ((i / 100) > 0);
+	return (numlen);
+}
+
+int	is_num_or_comma(char *str, int index, int stepbro)
+{
+	if (str[index] < '0' || str[index] > '9')
+		return (0);
+	while (str[index] >= '0' && str[index] <= '9')
+		index++;
+	if (stepbro == 3)
+	{
+		if (str[index])
+			return (0);
+		return (1);
+	}
+	if (str[index] != ',')
+		return (0);
+	return (is_num_or_comma(str, index + 1, stepbro + 1));
+}
 
 void	set_angles(t_all *a, float *f)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 17:12:37 by requinch          #+#    #+#             */
-/*   Updated: 2022/07/08 01:07:15 by requinch         ###   ########.fr       */
+/*   Updated: 2022/08/22 22:35:17 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
 int				ft_hexatoi(char *str, int j);
 char			*ft_itohexa(int nb);
 
+char			*ft_strfcat(char *first, char second);
 int				get_next_line(int fd, char **line);
 int				has_nl(char *str);
 

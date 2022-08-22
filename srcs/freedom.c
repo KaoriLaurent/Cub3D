@@ -6,7 +6,7 @@
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 00:31:55 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/22 19:21:06 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/22 22:08:37 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,10 @@ int	free_return(void *ptdr, int ret)
 {
 	free (ptdr);
 	return (ret);
+}
+
+void	freefree(void *uno, void *dos)
+{
+	free(uno);
+	free(dos);
 }

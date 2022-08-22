@@ -6,7 +6,7 @@
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 00:54:45 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/22 18:02:04 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/22 23:42:26 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@
 /******************************************************************************/
 
 # define EXPECTED_FILEFORMAT ".cub"
-# define WIN_WIDTH 3840
-# define WIN_HEIGHT 2160
-# define WIN_WIDTH_F 3840.0f
-# define WIN_HEIGHT_F 2160.0f
+# define WIN_WIDTH 1920
+# define WIN_HEIGHT 1080
+# define WIN_WIDTH_F 1920.0f
+# define WIN_HEIGHT_F 1080.0f
 # define PI 3.14159265
 
 /******************************************************************************/
@@ -214,6 +214,7 @@ void			fill_world(t_world *world);
 int				free_world(t_world	*world);
 int				free_text(char **text, int ret);
 int				free_return(void *ptdr, int ret);
+void			freefree(void *uno, void *dos);
 
 /*	graphics.c			*/
 
@@ -233,6 +234,7 @@ void			player_movements(int keycode, t_player *player);
 
 /*	reader.c			*/
 
+t_boolean		check_fileformat(char *filepath, char *expected);
 char			*read_file(char *filepath);
 
 /*	parser_frame.c		*/
@@ -263,8 +265,10 @@ t_vector		shift_east(t_vector pos);
 
 t_position		next_intersection(float angle, t_player p, float r);
 void			get_ray(int i, t_position p, t_all *a, int *ray);
-void			first_ray(t_all *all, t_position pos, t_position player_pos, int *wall);
-void			add_ray(t_all *all, t_position pos, t_position player_pos, int *wall);
+void			first_ray(t_all *all, t_position pos, t_position player_pos,
+					int *wall);
+void			add_ray(t_all *all, t_position pos, t_position player_pos,
+					int *wall);
 float			set_r(float angle, t_position pos, int i, int a);
 
 /*	reader.c			*/
@@ -273,6 +277,8 @@ char			*read_file(char *filepath);
 
 /*	utils.c				*/
 
+int				numlen(int i);
+int				is_num_or_comma(char *str, int index, int stepbro);
 void			set_angles(t_all *a, float *f);
 void			set_ratios(float *f);
 float			incr_angle(float angle);
