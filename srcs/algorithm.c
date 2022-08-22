@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algorithm.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anbourge <anbourge@42.student.fr>          +#+  +:+       +#+        */
+/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:48:58 by anbourge          #+#    #+#             */
-/*   Updated: 2022/08/21 16:43:21 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/22 18:18:35 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	algorithm(t_all *a, int i)
 	float		f[5];
 
 	set_angles(a, f);
-	while ((int)f[0] != (int)f[1])
+	while (i < 599)
 	{
 		set_ratios(f);
 		while (f[4] >= 0.000001)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   filling.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 05:20:05 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/21 17:54:22 by requinch         ###   ########.fr       */
+/*   Updated: 2022/08/22 19:07:48 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	**fill_mapmap(int **map, char *raw, t_player *player, int index)
 			break ;
 		index += current.y + 1;
 	}
-	map = malloc(current.x * sizeof(int *));
+	map = malloc((current.x + 1) * sizeof(int *));
 	map[current.x] = NULL;
 	while (--current.x > -1)
 		map[current.x] = temp[current.x];

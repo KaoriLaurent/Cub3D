@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 00:54:45 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/21 17:55:15 by requinch         ###   ########.fr       */
+/*   Updated: 2022/08/22 18:02:04 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@
 /******************************************************************************/
 
 # define EXPECTED_FILEFORMAT ".cub"
-# define WIN_WIDTH 1280
-# define WIN_HEIGHT 720
+# define WIN_WIDTH 3840
+# define WIN_HEIGHT 2160
+# define WIN_WIDTH_F 3840.0f
+# define WIN_HEIGHT_F 2160.0f
 # define PI 3.14159265
 
 /******************************************************************************/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anbourge <anbourge@42.student.fr>          +#+  +:+       +#+        */
+/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 15:19:59 by anbourge          #+#    #+#             */
-/*   Updated: 2022/08/21 12:32:21 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/22 18:47:26 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	get_texture_color(int *s, t_vars *vars, float lh, t_rays *r)
 
 	t = &vars->tex[r->side];
 	step = 1.0 * t->height / (lh * 1.4);
-	texpos = (s[0] - 720.0 / 2.0 + lh / 2.0) * step;
+	texpos = (s[0] - WIN_HEIGHT_F / 2.0 + lh / 2.0) * step;
 	texpos += step * (s[1] - s[0]);
 	tex[1] = (int)texpos & (t->height - 1);
 	if (r->side == 0 || r->side == 2)
@@ -53,9 +53,9 @@ int	graphics2(t_all *a, int *i, int *limit, float lh)
 	int	s[2];
 
 	s[0] = limit[0];
-	while (++i[1] < 2)
+	while (++i[1] < 6)
 	{
-		i[2] = 0;
+		i[2] = 1;
 		while (i[2] < limit[0])
 			my_mlx_pixel_put(&a->vars->img, i[3], ++i[2],
 				a->world->map.ceiling_clr);
@@ -67,7 +67,7 @@ int	graphics2(t_all *a, int *i, int *limit, float lh)
 				get_texture_color(s, a->vars, lh, a->r));
 		}
 		i[2]--;
-		while (i[2] <= 720)
+		while (i[2] <= WIN_HEIGHT)
 			my_mlx_pixel_put(&a->vars->img, i[3], ++i[2],
 				a->world->map.ground_clr);
 		i[3]--;
@@ -80,9 +80,9 @@ int	graphics3(t_all *a, int *i, int *limit, float lh)
 	int	s[2];
 
 	s[0] = limit[0];
-	while (++i[1] < 3)
+	while (++i[1] < 8)
 	{
-		i[2] = 0;
+		i[2] = 1;
 		while (i[2] < limit[0])
 			my_mlx_pixel_put(&a->vars->img, i[3], ++i[2],
 				a->world->map.ceiling_clr);
@@ -94,7 +94,7 @@ int	graphics3(t_all *a, int *i, int *limit, float lh)
 				get_texture_color(s, a->vars, lh, a->r));
 		}
 		i[2]--;
-		while (i[2] <= 720)
+		while (i[2] <= WIN_HEIGHT)
 			my_mlx_pixel_put(&a->vars->img, i[3], ++i[2],
 				a->world->map.ground_clr);
 		i[3]--;
@@ -109,21 +109,21 @@ void	graphics(t_all *a)
 	int		limit[2];
 
 	i[0] = 1;
-	i[3] = 1280;
+	i[3] = WIN_WIDTH;
 	while (a->r)
 	{
-		lh = (2.0 * 720.0) / a->r->dist;
-		limit[0] = (-lh / 2) + (720 / 2);
+		lh = (2.0 * WIN_HEIGHT_F) / a->r->dist;
+		limit[0] = (-lh / 2) + (WIN_HEIGHT / 2);
 		if (limit[0] < 0)
 			limit[0] = 0;
-		limit[1] = (lh / 2) + (720 / 2);
-		if (limit[1] >= 720)
-			limit[1] = 719;
+		limit[1] = (lh / 2) + (WIN_HEIGHT / 2);
+		if (limit[1] >= WIN_HEIGHT)
+			limit[1] = WIN_HEIGHT - 1;
 		i[1] = -1;
-		if (i[0] % 6 == 0)
-			i[3] = graphics2(a, i, limit, lh);
-		else
+		if (i[0] % 5 == 0)
 			i[3] = graphics3(a, i, limit, lh);
+		else
+			i[3] = graphics2(a, i, limit, lh);
 		i[0]++;
 		a->r = a->r->next;
 	}

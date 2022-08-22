@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anbourge <anbourge@42.student.fr>          +#+  +:+       +#+        */
+/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 17:27:01 by anbourge          #+#    #+#             */
-/*   Updated: 2022/08/21 13:17:12 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/22 19:15:11 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	window_init(t_all *a)
 {
 	a->vars->mlx = mlx_init();
 	a->vars->win = mlx_new_window(a->vars->mlx, WIN_WIDTH, WIN_HEIGHT, "Cub3D");
-	a->vars->img.img = mlx_new_image(a->vars->mlx, 1920, 1080);
+	a->vars->img.img = mlx_new_image(a->vars->mlx, WIN_WIDTH, WIN_HEIGHT);
 	a->vars->img.addr = mlx_get_data_addr(a->vars->img.img,
 			&a->vars->img.bits_per_pixel, &a->vars->img.line_length,
 			&a->vars->img.endian);
