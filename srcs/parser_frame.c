@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_frame.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 00:54:00 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/23 14:19:00 by requinch         ###   ########.fr       */
+/*   Updated: 2022/08/23 16:06:56 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ unsigned short	parse_next_line(int fd, t_counter step)
 		parse_retval = parse_map(line, fd, gnl_ret);
 	else if (step == 7 && gnl_ret != 0)
 		parse_retval = parse_rest(line, gnl_ret);
-	printf("step : %i - retval : %i\n", step, parse_retval);
 	if (step != 6 || (step == 6 && parse_retval == 0))
 		free(line);
 	if (parse_retval % 10 == 5)

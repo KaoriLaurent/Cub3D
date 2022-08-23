@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_routines.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 17:50:14 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/23 04:31:40 by requinch         ###   ########.fr       */
+/*   Updated: 2022/08/23 16:37:06 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,17 +101,15 @@ short	parse_map(char *line, int fd, int gnl_ret)
 	gnl_ret = 1;
 	while (line && line[0])
 	{
-		map[total.height] = ft_strfcat(ft_strfcat(ft_strfcat(ft_strfcat(
-							ft_strfcat(ft_strfcat(ft_strfcat(
-										ft_strfcat(line,
-											' '), ' '), ' '), ' '), ' '), ' '),
-					' '), ' ');
+		map[total.height] = ft_strdup(line);
+		free(line);
 		gnl_ret = get_next_line(fd, &line);
 		if (gnl_ret == -1)
 			return (error_int_ret(ERR_GNL, 3));
 		total.height += 1;
 	}
 	free(line);
+	map = mapcpy(map, total.height);
 	return (check_the_map(map, total.height) + 10 * (gnl_ret == 0));
 }
 

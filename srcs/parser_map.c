@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 16:43:08 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/23 04:11:45 by requinch         ###   ########.fr       */
+/*   Updated: 2022/08/23 16:39:10 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ t_vector	get_starting_pos(char **map)
 
 t_boolean	recursive_check(char **map, t_vector pos, t_counter step)
 {
-//	step_debug_map_parser(map, pos, step);
 	if ((map[pos.y][pos.x] == '0' || map[pos.y][pos.x] == 'N'
 		|| map[pos.y][pos.x] == 'S' || map[pos.y][pos.x] == 'E'
 			|| map[pos.y][pos.x] == 'W' || map[pos.y][pos.x] == ' ')

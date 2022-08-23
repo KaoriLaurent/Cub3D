@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 00:54:45 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/23 04:23:52 by requinch         ###   ########.fr       */
+/*   Updated: 2022/08/23 16:23:08 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define WIN_HEIGHT 1080
 # define WIN_WIDTH_F 1920.0f
 # define WIN_HEIGHT_F 1080.0f
-# define PI 3.14159265
+# define PI 3.14159265f
 
 /******************************************************************************/
 /*			Simple typedefs													  */
@@ -286,6 +286,7 @@ float			incr_angle(float angle);
 
 /*	window.c			*/
 
+char			**mapcpy(char **map, int height);
 void			window_init(t_all *a);
 int				my_exit_hook(t_all *all);
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);

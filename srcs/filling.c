@@ -6,7 +6,7 @@
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 05:20:05 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/22 19:07:48 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/23 16:46:36 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	fill_player(t_vector current, t_player *player, char *c)
 	else if (c[0] == 'E')
 		player->dir = 0.0;
 	c[0] = '0';
-	player->pos.x = (float)current.x;
-	player->pos.y = (float)current.y;
+	player->pos.x = (float)current.x + 0.5f;
+	player->pos.y = (float)current.y + 0.5f;
 	player->fov = 60.0;
 }
 

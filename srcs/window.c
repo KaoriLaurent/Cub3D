@@ -6,11 +6,35 @@
 /*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 17:27:01 by anbourge          #+#    #+#             */
-/*   Updated: 2022/08/22 21:23:08 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/23 16:37:36 by anbourge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+char	**mapcpy(char **map, int height)
+{
+	char	**new;
+	int		max_width;
+	int		index;
+
+	index = -1;
+	max_width = 0;
+	new = calloc(height + 1, sizeof(char *));
+	while (map[++index])
+		if (ft_strlen(map[index]) > max_width)
+			max_width = ft_strlen(map[index]);
+	index = -1;
+	while (map[++index])
+	{
+		new[index] = ft_strcpy(map[index]);
+		while (ft_strlen(new[index]) < max_width)
+			new[index] = ft_strfcat(new[index], '0');
+	}
+	new[index] = NULL;
+	free_text(map, 0);
+	return (new);
+}
 
 void	window_init(t_all *a)
 {
