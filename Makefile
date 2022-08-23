@@ -26,6 +26,9 @@ sanitize : $(SRCO_BASIC) $(SRCO_GFX)
 	bash mlx_linux/configure
 	cc -o $(NAME) $(SRCO_BASIC) $(SRCO_GFX) -L/usr/lib -Lmlx_linux -lmlx_Linux -Imlx_linux -lXext -lX11 -lm -lz libft/libft.a -fsanitize=address
 
+generator :
+	cc -o map_gen map_generator/main.c
+
 %.o : %.c
 	cc $(FLAG) -I/usr/include -Imlx_linux -O3 -o $(NAME) -c $< -o $@ $(FLAG_INC) $(INC)
 
