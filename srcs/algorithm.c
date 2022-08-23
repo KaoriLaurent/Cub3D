@@ -6,7 +6,7 @@
 /*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:48:58 by anbourge          #+#    #+#             */
-/*   Updated: 2022/08/23 18:21:49 by requinch         ###   ########.fr       */
+/*   Updated: 2022/08/23 18:24:18 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ int	map_check_pos(int **map, int *ray, float f)
 {
 	int	i;
 
-	//printf("pos (%i,%i)\n", ray[1], ray[0]);
 	i = 0;
 	while (map[i])
 		i++;
@@ -88,12 +87,10 @@ int	map_check_pos(int **map, int *ray, float f)
 	i = 0;
 	while (map[ray[0]][i] != -1)
 		i++;
-	//printf("pos (%i,%i) & x max = %i\n", ray[1], ray[0], i);
 	if (ray[1] > (i - 1) || ray[1] < 1)
 		return (1);
 	if (map[ray[0]][ray[1]] == 1 && f >= 0.000001)
 		return (1);
-	//printf("pos (%i,%i)\n", ray[1], ray[0]);
 	return (0);
 }
 
@@ -112,7 +109,6 @@ void	algorithm(t_all *a, int i)
 	float		f[5];
 
 	set_angles(a, f);
-	//print_map_int(a->world->map.map);
 	while (i < 599)
 	{
 		set_ratios(f);
@@ -129,7 +125,6 @@ void	algorithm(t_all *a, int i)
 			f[3] = f[2];
 			f[2] += f[4];
 		}
-		//printf("pos (%i,%i)\n", ray[1], ray[0]);
 		get_ray(++i, p, a, ray);
 		f[0] = incr_angle(f[0]);
 	}
