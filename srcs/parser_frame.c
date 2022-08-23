@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_frame.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
+/*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 00:54:00 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/23 00:19:58 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/23 04:32:05 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 **				1 when proper element parsed
 **				2 when invalid
 **				3 when GNL dieded
+**				5 when degen shite
 **				+10 when EOF reached
 */
 
@@ -36,10 +37,10 @@ unsigned short	parse_next_line(int fd, t_counter step)
 	if (step < 6)
 		parse_retval = parse_upper(line);
 	else if (step == 6)
-		parse_retval = parse_map(line, fd);
+		parse_retval = parse_map(line, fd, gnl_ret);
 	else if (step == 7 && gnl_ret != 0)
 		parse_retval = parse_rest(line, gnl_ret);
-	if (step != 6 || (step == 6 && parse_retval == 0))
+	if (step != 6 || (step == 6 && (parse_retval == 0 || parse_retval == 5)))
 		free(line);
 	if (gnl_ret == 0)
 		return (10 + parse_retval);

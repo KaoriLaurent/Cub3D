@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
+/*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 00:54:45 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/22 23:42:26 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/23 04:23:52 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,6 +215,7 @@ int				free_world(t_world	*world);
 int				free_text(char **text, int ret);
 int				free_return(void *ptdr, int ret);
 void			freefree(void *uno, void *dos);
+int				freefree_ret(void *uno, void *dos, int ret);
 
 /*	graphics.c			*/
 
@@ -243,14 +244,14 @@ t_boolean		parsing(char *cub_raw);
 
 /*	parser_map.c		*/
 
-unsigned short	check_the_map(char **map);
+unsigned short	check_the_map(char **map, t_size height);
 
 /*	parser_routines.c	*/
 
 short			parse_texture(char *line, t_counter step);
 short			parse_color(char *line, t_counter step);
 short			parse_upper(char *line);
-short			parse_map(char *line, int fd);
+short			parse_map(char *line, int fd, int gnl_ret);
 short			parse_rest(char *line, short gnl_ret);
 
 /*	parser_utils.c		*/

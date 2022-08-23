@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
+/*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 16:43:08 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/23 00:19:52 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/23 04:11:45 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,10 @@ t_vector	get_starting_pos(char **map)
 
 t_boolean	recursive_check(char **map, t_vector pos, t_counter step)
 {
-	if ((map[pos.y][pos.x] == ' ' || map[pos.y][pos.x] == '0')
+//	step_debug_map_parser(map, pos, step);
+	if ((map[pos.y][pos.x] == '0' || map[pos.y][pos.x] == 'N'
+		|| map[pos.y][pos.x] == 'S' || map[pos.y][pos.x] == 'E'
+			|| map[pos.y][pos.x] == 'W' || map[pos.y][pos.x] == ' ')
 		&& is_edge(map, pos))
 		return (FALSE);
 	if (map[pos.y][pos.x] == '1' || map[pos.y][pos.x] == '2')
@@ -99,11 +102,11 @@ t_boolean	recursive_check(char **map, t_vector pos, t_counter step)
 	return (TRUE);
 }
 
-unsigned short	check_the_map(char **map)
+unsigned short	check_the_map(char **map, t_size height)
 {
 	t_vector	pos;
 
-	if (check_general(map) == FALSE)
+	if (height < 2 || check_general(map) == FALSE)
 		return (free_text(map, 2));
 	pos = get_starting_pos(map);
 	if (recursive_check(map, pos, 0) == FALSE)

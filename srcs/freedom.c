@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   freedom.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
+/*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 00:31:55 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/22 22:08:37 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/23 04:23:30 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,11 @@ void	freefree(void *uno, void *dos)
 {
 	free(uno);
 	free(dos);
+}
+
+int	freefree_ret(void *uno, void *dos, int ret)
+{
+	free(uno);
+	free(dos);
+	return (ret);
 }

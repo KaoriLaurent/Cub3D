@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_routines.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
+/*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 17:50:14 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/22 23:54:12 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/23 04:31:40 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,28 +89,30 @@ short	parse_upper(char *line)
 	}
 }
 
-short	parse_map(char *line, int fd)
+short	parse_map(char *line, int fd, int gnl_ret)
 {
 	char			**map;
 	t_resolution	total;
-	int				gnl_ret;
 
 	map = calloc(1000, sizeof(char *));
 	total.height = 0;
-	gnl_ret = 1;
 	if (line && !line[0])
-		return (free_return(map, 0));
+		return (free_return(map, 0 + 5 * (gnl_ret == 0)));
+	gnl_ret = 1;
 	while (line && line[0])
 	{
-		map[total.height] = ft_strdup(line);
-		free(line);
+		map[total.height] = ft_strfcat(ft_strfcat(ft_strfcat(ft_strfcat(
+							ft_strfcat(ft_strfcat(ft_strfcat(
+										ft_strfcat(line,
+											' '), ' '), ' '), ' '), ' '), ' '),
+					' '), ' ');
 		gnl_ret = get_next_line(fd, &line);
 		if (gnl_ret == -1)
 			return (error_int_ret(ERR_GNL, 3));
 		total.height += 1;
 	}
 	free(line);
-	return (check_the_map(map) + 10 * (gnl_ret == 0));
+	return (check_the_map(map, total.height) + 10 * (gnl_ret == 0));
 }
 
 short	parse_rest(char *line, short gnl_ret)

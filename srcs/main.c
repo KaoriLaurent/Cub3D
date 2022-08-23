@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
+/*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 03:24:43 by requinch          #+#    #+#             */
-/*   Updated: 2022/08/22 21:11:38 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/23 04:33:49 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	main(int ac, char **av)
 	t_world	world;
 	t_all	*a;
 
+	int sys = system("clear");
+	sys += 3;
 	if (ac != 2)
 		return (error_int_ret(ERR_ARG, 0));
 	if (!parsing(av[1]))
