@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algorithm.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anbourge <anbourge@student.42.fr>          +#+  +:+       +#+        */
+/*   By: requinch <requinch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:48:58 by anbourge          #+#    #+#             */
-/*   Updated: 2022/08/23 16:55:26 by anbourge         ###   ########.fr       */
+/*   Updated: 2022/08/23 18:21:49 by requinch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,28 @@ int	get_wall_side(t_position pos, int wall_x, int wall_y)
 	return (get_wall_side2(diff, tmp, ret));
 }
 
+int	map_check_pos(int **map, int *ray, float f)
+{
+	int	i;
+
+	//printf("pos (%i,%i)\n", ray[1], ray[0]);
+	i = 0;
+	while (map[i])
+		i++;
+	if (ray[0] > (i - 1) || ray[0] < 1)
+		return (1);
+	i = 0;
+	while (map[ray[0]][i] != -1)
+		i++;
+	//printf("pos (%i,%i) & x max = %i\n", ray[1], ray[0], i);
+	if (ray[1] > (i - 1) || ray[1] < 1)
+		return (1);
+	if (map[ray[0]][ray[1]] == 1 && f >= 0.000001)
+		return (1);
+	//printf("pos (%i,%i)\n", ray[1], ray[0]);
+	return (0);
+}
+
 /*
 **	f[0] = angle
 **	f[1] = angle max
@@ -90,6 +112,7 @@ void	algorithm(t_all *a, int i)
 	float		f[5];
 
 	set_angles(a, f);
+	//print_map_int(a->world->map.map);
 	while (i < 599)
 	{
 		set_ratios(f);
@@ -98,7 +121,7 @@ void	algorithm(t_all *a, int i)
 			p = next_intersection(f[0], a->world->player, f[2]);
 			ray[0] = p.y;
 			ray[1] = p.x;
-			if (a->world->map.map[ray[0]][ray[1]] == 1 && f[4] >= 0.000001)
+			if (map_check_pos(a->world->map.map, ray, f[4]))
 			{
 				f[4] /= 10;
 				f[2] = f[3];
@@ -106,6 +129,7 @@ void	algorithm(t_all *a, int i)
 			f[3] = f[2];
 			f[2] += f[4];
 		}
+		//printf("pos (%i,%i)\n", ray[1], ray[0]);
 		get_ray(++i, p, a, ray);
 		f[0] = incr_angle(f[0]);
 	}
